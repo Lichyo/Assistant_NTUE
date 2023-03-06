@@ -1,4 +1,7 @@
+import 'package:assistant/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:assistant/components/draw_header.dart';
+import 'package:assistant/components/menu_item.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -7,6 +10,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
         actions: const [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.0),
@@ -25,7 +29,22 @@ class Home extends StatelessWidget {
         ),
       ),
       drawer: Drawer(
-        child: ListView(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: const [
+              DrawHeader(),
+              MenuItem(text: 'Profile', icon: Icons.person),
+              MenuItem(text: 'Curriculum', icon: Icons.list),
+              MenuItem(text: 'Note', icon: Icons.book_rounded),
+              Divider(height: 50),
+              MenuItem(text: 'Setting', icon: Icons.settings),
+              MenuItem(text: 'Notification', icon: Icons.notifications),
+              MenuItem(text: 'Issue Report', icon: Icons.feedback_outlined),
+            ],
+          ),
+        ),
       ),
     );
   }

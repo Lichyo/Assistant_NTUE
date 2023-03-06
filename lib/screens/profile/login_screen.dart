@@ -1,8 +1,12 @@
+// ignore_for_file: must_be_immutable, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  LoginScreen({Key? key}) : super(key: key);
+  late String ID;
+  late String password;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,10 @@ class LoginScreen extends StatelessWidget {
             ),
             child: TextField(
               decoration:
-                  kTextFieldDecoration.copyWith(hintText: 'Enter your ID'),
+                  kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
+              onChanged: (value){
+                ID = value;
+              },
             ),
           ),
           Padding(
@@ -49,7 +56,10 @@ class LoginScreen extends StatelessWidget {
             ),
             child: TextField(
               decoration:
-                  kTextFieldDecoration.copyWith(hintText: 'Enter your password'),
+                  kTextFieldDecoration.copyWith(labelText: 'Enter your password'),
+              onChanged: (value){
+                password = value;
+              },
             ),
           ),
         ],
