@@ -7,15 +7,25 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Icon(
+              Icons.calendar_month,
+              size: 30,
+            ),
+          ),
+        ],
         title: const Text(
           'NTUE Assistant',
-          textAlign: TextAlign.center,
           style: TextStyle(
+            fontSize: 25,
             fontWeight: FontWeight.bold,
-            fontSize: 25.0,
           ),
         ),
-
+      ),
+      drawer: Drawer(
+        child: ListView(),
       ),
     );
   }
