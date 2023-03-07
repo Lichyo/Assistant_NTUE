@@ -2,22 +2,30 @@ import 'package:assistant/screens/profile/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 
-class MenuItem extends StatelessWidget {
+class MenuItem extends StatefulWidget {
   const MenuItem({
     super.key,
     required this.icon,
     required this.text,
+    required this.navigatorPage,
   });
 
   final IconData icon;
   final String text;
+  final Function navigatorPage;
 
+  @override
+  State<MenuItem> createState() => _MenuItemState();
+}
+
+class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => const Account()));
+        setState(() {
+          widget.navigatorPage;
+        });
       },
       child: Container(
         padding: const EdgeInsets.only(left: 30.0, top: 20.0),
@@ -26,7 +34,7 @@ class MenuItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
-              icon,
+              widget.icon,
               size: 30.0,
               color: Colors.grey.shade500,
             ),
@@ -34,7 +42,7 @@ class MenuItem extends StatelessWidget {
               width: 50.0,
             ),
             Text(
-              text,
+              widget.text,
               style: kMenuTextStyle.copyWith(color: Colors.grey.shade600),
               textAlign: TextAlign.center,
             ),
