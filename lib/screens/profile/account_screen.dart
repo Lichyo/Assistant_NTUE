@@ -32,22 +32,34 @@ class Account extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 50.0,),
-            RoundedButton(
-              color: Colors.lightBlue,
-              title: 'Login',
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
-              },
+            const SizedBox(
+              height: 50.0,
             ),
-            RoundedButton(
-              color: Colors.lightBlue,
-              title: 'Register',
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => RegisterScreen()));
-              },
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30.0,
+              ),
+              child: RoundedButton(
+                color: Colors.lightBlue,
+                title: 'Login',
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30.0,
+              ),
+              child: RoundedButton(
+                color: Colors.lightBlue,
+                title: 'Register',
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RegisterScreen()));
+                },
+              ),
             ),
           ],
         ),

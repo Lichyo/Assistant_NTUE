@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
         title: const Text(
           'NTUE Assistant',
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),

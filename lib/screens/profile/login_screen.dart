@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,7 @@ class LoginScreen extends StatelessWidget {
             child: TextField(
               decoration:
                   kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
-              onChanged: (value){
+              onChanged: (value) {
                 ID = value;
               },
             ),
@@ -55,11 +55,33 @@ class LoginScreen extends StatelessWidget {
               horizontal: 30.0,
             ),
             child: TextField(
-              decoration:
-                  kTextFieldDecoration.copyWith(labelText: 'Enter your password'),
-              onChanged: (value){
+              decoration: kTextFieldDecoration.copyWith(
+                  labelText: 'Enter your password'),
+              onChanged: (value) {
                 password = value;
               },
+            ),
+          ),
+          Padding(
+            padding:
+            const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+            child: ElevatedButton(
+              style: const ButtonStyle(
+                padding: MaterialStatePropertyAll(
+                  EdgeInsets.symmetric(
+                    horizontal: 30.0,
+                    vertical: 10.0,
+                  ),
+                ),
+                backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
+              ),
+              onPressed: () {
+
+              },
+              child: const Text(
+                'Submit',
+                style: kButtonTextStyle,
+              ),
             ),
           ),
         ],

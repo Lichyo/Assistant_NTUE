@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 const kTitleTextStyle = TextStyle(
-  fontSize: 70.0,
+  fontSize: 50.0,
   fontWeight: FontWeight.w700,
   color: Colors.lightBlue,
   fontFamily: 'Ubuntu',
