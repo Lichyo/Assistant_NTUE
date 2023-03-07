@@ -2,11 +2,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
+import 'package:assistant/screens/home_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
-  late String ID;
-  late String password;
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String ID = "";
+  String password = "";
+  bool isObscure = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +50,7 @@ class LoginScreen extends StatelessWidget {
               vertical: 5.0,
             ),
             child: TextField(
+              keyboardType: TextInputType.number,
               decoration:
                   kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
               onChanged: (value) {
@@ -55,8 +64,18 @@ class LoginScreen extends StatelessWidget {
               horizontal: 30.0,
             ),
             child: TextField(
+              obscureText: isObscure,
               decoration: kTextFieldDecoration.copyWith(
-                  labelText: 'Enter your password'),
+                labelText: 'Enter your password',
+                suffix: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      isObscure = !isObscure;
+                    });
+                  },
+                  child: const Icon(Icons.remove_red_eye_outlined),
+                ),
+              ),
               onChanged: (value) {
                 password = value;
               },
@@ -64,7 +83,7 @@ class LoginScreen extends StatelessWidget {
           ),
           Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
             child: ElevatedButton(
               style: const ButtonStyle(
                 padding: MaterialStatePropertyAll(
@@ -76,7 +95,9 @@ class LoginScreen extends StatelessWidget {
                 backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
               ),
               onPressed: () {
-
+                FocusManager.instance.primaryFocus?.unfocus();
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Home()));
               },
               child: const Text(
                 'Submit',

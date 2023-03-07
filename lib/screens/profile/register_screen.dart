@@ -2,13 +2,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
+import 'package:assistant/screens/home_screen.dart';
+import 'package:flutter/services.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
-  late String ID;
-  late String password;
-  late String name;
-  late String email;
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  String ID = "";
+  String password = "";
+  String name = "";
+  String email = "";
+  bool isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -39,42 +48,65 @@ class RegisterScreen extends StatelessWidget {
             height: 30.0,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
             child: TextField(
-              onChanged: (value){
+              onChanged: (value) {
                 name = value;
               },
-                decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your name'),),
+              keyboardType: TextInputType.name,
+              decoration:
+                  kTextFieldDecoration.copyWith(labelText: 'Enter your name'),
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
             child: TextField(
-              onChanged: (value){
+              onChanged: (value) {
                 ID = value;
               },
+              keyboardType: TextInputType.number,
               decoration:
-              kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),),
+                  kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
             child: TextField(
-              onChanged: (value){
+              onChanged: (value) {
                 email = value;
               },
+              keyboardType: TextInputType.emailAddress,
               decoration:
-              kTextFieldDecoration.copyWith(labelText: 'Enter your email'),),
+                  kTextFieldDecoration.copyWith(labelText: 'Enter your email'),
+            ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
             child: TextField(
-              onChanged: (value){
+              onChanged: (value) {
                 password = value;
               },
-              decoration:
-              kTextFieldDecoration.copyWith(labelText: 'Enter your password'),),
+              keyboardType: TextInputType.text,
+              obscureText: isObscure,
+              decoration: kTextFieldDecoration.copyWith(
+                labelText: 'Enter your password',
+                suffix: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isObscure = !isObscure;
+                    });
+                  },
+                  child: const Icon(
+                    Icons.remove_red_eye_outlined,
+                  ),
+                ),
+              ),
+            ),
           ),
-
           Padding(
             padding:
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
@@ -89,7 +121,8 @@ class RegisterScreen extends StatelessWidget {
                 backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
               ),
               onPressed: () {
-                
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const Home()));
               },
               child: const Text(
                 'Submit',
