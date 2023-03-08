@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CalendarCurriculum extends StatelessWidget {
-  const CalendarCurriculum({Key? key}) : super(key: key);
+class NoteScreen extends StatelessWidget {
+  const NoteScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

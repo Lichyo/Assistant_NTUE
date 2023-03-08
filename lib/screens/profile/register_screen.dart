@@ -122,7 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Home()));
+                    MaterialPageRoute(builder: (context) => Home()));
               },
               child: const Text(
                 'Submit',

@@ -36,5 +36,6 @@ const kMenuTextStyle = TextStyle(
   color: Colors.grey,
   fontWeight: FontWeight.w600,
   fontSize: 18.0,
-
 );
+
+enum Week {mon, tues, wed, thur, fri}
