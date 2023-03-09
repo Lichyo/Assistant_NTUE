@@ -100,7 +100,7 @@ class Home extends StatelessWidget {
       body: Column(
         children: const [
           Expanded(
-            child: BasicCurriculumScreen(),
+            child: NoteScreen(),
           ),
         ],
       ),

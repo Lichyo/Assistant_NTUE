@@ -23,4 +23,12 @@ class ClassData {
     }
     return newCurriculum;
   }
+
+  List<String> getClassName(){
+    List<String> className = [];
+    for(int index = 0; index < curriculumData.length; index++) {
+      className.add(curriculumData[index].className);
+    }
+    return className;
+  }
 }

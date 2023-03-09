@@ -1,6 +1,6 @@
-import 'package:assistant/screens/curriculum/basic_curriculum_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/components/task/task_list.dart';
 
 class ClassContainer extends StatelessWidget {
   ClassContainer({
@@ -25,7 +25,7 @@ class ClassContainer extends StatelessWidget {
         onTap: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const BasicCurriculumScreen(),
+              builder: (context) => const TaskList(),
             ),
           );
         },
