@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
-import 'package:assistant/components/task/task_list.dart';
 
 class ClassContainer extends StatelessWidget {
-  ClassContainer({
+  const ClassContainer({
     super.key,
     required this.curriculum,
   });
-  Curriculum curriculum;
+  final Curriculum curriculum;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +21,7 @@ class ClassContainer extends StatelessWidget {
       ),
       isThreeLine: true,
       trailing: GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => const TaskList(),
-            ),
-          );
-        },
+        onTap: () {},
         child: const Icon(
           Icons.arrow_forward,
           color: Colors.black,

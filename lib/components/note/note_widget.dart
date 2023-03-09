@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:assistant/models/note/note.dart';
 
 class NoteWidget extends StatelessWidget {
   const NoteWidget({
     super.key,
-    required this.title,
-    required this.description,
-    required this.deadTime,
+    required this.note
   });
-  final String title;
-  final String description;
-  final DateTime deadTime;
+  final Note note;
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,14 +18,14 @@ class NoteWidget extends StatelessWidget {
             children: [
               ListTile(
                 leading: const Icon(Icons.album),
-                title: Text(title),
+                title: Text(note.title),
                 isThreeLine: true,
-                subtitle: Text(description, ),
+                subtitle: Text(note.description),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(deadTime.toString()),
+                  Text(note.deadTime.toString()),
                   const SizedBox(
                     width: 15.0,
                   ),

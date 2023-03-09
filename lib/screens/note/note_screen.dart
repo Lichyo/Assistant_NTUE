@@ -1,7 +1,6 @@
-import 'package:assistant/main.dart';
 import 'package:assistant/screens/note/add_note_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:assistant/components/note/note_widget.dart';
+import 'package:assistant/components/note/note_list.dart';
 
 class NoteScreen extends StatelessWidget {
   const NoteScreen({Key? key}) : super(key: key);
@@ -16,15 +15,7 @@ class NoteScreen extends StatelessWidget {
         },
         child: const Icon(Icons.add),
       ),
-      body: ListView(
-        children: [
-          NoteWidget(
-            title: 'Title',
-            deadTime: DateTime.now(),
-            description: 'Description',
-          ),
-        ],
-      ),
+      body: NoteList(),
     );
   }
 }

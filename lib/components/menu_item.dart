@@ -6,12 +6,10 @@ class MenuItem extends StatefulWidget {
     super.key,
     required this.icon,
     required this.text,
-    required this.navigateCallBack,
   });
 
   final IconData icon;
   final String text;
-  final VoidCallback navigateCallBack;
 
   @override
   State<MenuItem> createState() => _MenuItemState();
@@ -21,7 +19,11 @@ class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: widget.navigateCallBack,
+      onTap: (){
+        setState(() {
+
+        });
+      },
       child: Container(
         padding: const EdgeInsets.only(left: 30.0, top: 20.0),
         width: double.infinity,

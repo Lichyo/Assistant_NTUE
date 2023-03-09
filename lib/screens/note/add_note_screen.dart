@@ -1,14 +1,19 @@
 import 'package:assistant/constant.dart';
+import 'package:assistant/models/note/note.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
+import 'package:assistant/components/rounded_button.dart';
+import 'package:assistant/models/note/note_data.dart';
 
 class AddNote extends StatefulWidget {
   AddNote({Key? key}) : super(key: key);
   @override
   State<AddNote> createState() => _AddNoteState();
 }
-final ClassData classData = ClassData();
+
+ClassData classData = ClassData();
+NoteData noteData = NoteData();
 
 class _AddNoteState extends State<AddNote> {
   List<String> items = classData.getClassName();
@@ -138,7 +143,19 @@ class _AddNoteState extends State<AddNote> {
               ),
             ),
           ),
-          GestureDetector(child: const Card()),
+          RoundedButton(
+            title: 'Submit',
+            color: Colors.lightBlue,
+            onPressed: () {
+              noteData.noteData.add(Note(
+                  title: 'addTest',
+                  description: 'description',
+                  deadTime: DateTime.now(),
+                  className: 'className'));
+              print('Submit');
+              print(noteData.noteData);
+            },
+          ),
         ],
       ),
     );
