@@ -44,7 +44,7 @@ class AccountScreen extends StatelessWidget {
                 title: 'Login',
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
+                      MaterialPageRoute(builder: (context) => const LoginScreen()));
                 },
               ),
             ),
@@ -57,7 +57,7 @@ class AccountScreen extends StatelessWidget {
                 title: 'Register',
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RegisterScreen()));
+                      builder: (context) => const RegisterScreen()));
                 },
               ),
             ),

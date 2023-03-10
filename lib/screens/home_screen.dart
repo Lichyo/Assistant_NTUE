@@ -1,3 +1,4 @@
+import 'package:assistant/models/note/note_data.dart';
 import 'package:assistant/screen_controller.dart';
 import 'package:assistant/screens/note/note_screen.dart';
 import 'package:flutter/material.dart';

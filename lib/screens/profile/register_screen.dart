@@ -3,10 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/screens/home_screen.dart';
-import 'package:flutter/services.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -122,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               onPressed: () {
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Home()));
+                    MaterialPageRoute(builder: (context) => const Home()));
               },
               child: const Text(
                 'Submit',

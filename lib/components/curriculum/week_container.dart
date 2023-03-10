@@ -32,6 +32,7 @@ List<ClassContainer> getWeekData(Week week) {
   return classContainers;
 }
 
+// ignore: must_be_immutable
 class WeekContainer extends StatelessWidget {
   WeekContainer({
     super.key,

@@ -5,7 +5,7 @@ import 'package:assistant/constant.dart';
 import 'package:assistant/screens/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
               onPressed: () {
                 FocusManager.instance.primaryFocus?.unfocus();
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Home()));
+                    MaterialPageRoute(builder: (context) => const Home()));
               },
               child: const Text(
                 'Submit',

@@ -1,23 +1,24 @@
 import 'package:assistant/constant.dart';
-import 'package:assistant/models/note/note.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:assistant/components/rounded_button.dart';
 import 'package:assistant/models/note/note_data.dart';
+import 'package:provider/provider.dart';
 
 class AddNote extends StatefulWidget {
-  AddNote({Key? key}) : super(key: key);
+  const AddNote({Key? key}) : super(key: key);
   @override
   State<AddNote> createState() => _AddNoteState();
 }
 
 ClassData classData = ClassData();
-NoteData noteData = NoteData();
 
 class _AddNoteState extends State<AddNote> {
   List<String> items = classData.getClassName();
   String? selectedValue;
+  late String title;
+  late String description;
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +37,23 @@ class _AddNoteState extends State<AddNote> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+            padding: const EdgeInsets.only(
+                top: 50.0, left: 30.0, right: 30.0, bottom: 10.0),
             child: TextField(
+              onChanged: (value) {
+                title = value;
+              },
               decoration:
                   kTextFieldDecoration.copyWith(labelText: 'Enter your title'),
             ),
           ),
           Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10.0),
+            padding: const EdgeInsets.only(
+                top: 10.0, left: 30.0, right: 30.0, bottom: 30.0),
             child: TextField(
+              onChanged: (value) {
+                description = value;
+              },
               decoration: kTextFieldDecoration.copyWith(
                   labelText: 'Enter your Description'),
             ),
@@ -143,18 +150,50 @@ class _AddNoteState extends State<AddNote> {
               ),
             ),
           ),
-          RoundedButton(
-            title: 'Submit',
-            color: Colors.lightBlue,
-            onPressed: () {
-              noteData.noteData.add(Note(
-                  title: 'addTest',
-                  description: 'description',
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+            child: ElevatedButton(
+              style: ButtonStyle(),
+              onPressed: () async {
+                var result = await showDateRangePicker(
+                  context: context,
+                  firstDate: DateTime(2003),
+                  lastDate: DateTime(2030),
+                );
+
+                if (result != null) {
+                  setState(() {
+                    var deadTime = result;
+                  });
+                }
+              },
+              child: const Padding(
+                padding: EdgeInsets.all(18.0),
+                child: Text(
+                  'Enter the deadTime',
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+          ),
+          Expanded(child: Container()),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
+            child: RoundedButton(
+              title: 'Submit',
+              color: Colors.lightBlue,
+              onPressed: () {
+                Provider.of<NoteData>(context, listen: false).addNote(
+                  title: title,
+                  description: description,
                   deadTime: DateTime.now(),
-                  className: 'className'));
-              print('Submit');
-              print(noteData.noteData);
-            },
+                  subject: selectedValue.toString(),
+                );
+                Navigator.pop(context);
+              },
+            ),
           ),
         ],
       ),

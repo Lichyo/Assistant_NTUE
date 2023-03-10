@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 
 class NoteWidget extends StatelessWidget {
-  const NoteWidget({
-    super.key,
-    required this.note
-  });
+  const NoteWidget({super.key, required this.note});
   final Note note;
-
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +14,15 @@ class NoteWidget extends StatelessWidget {
             children: [
               ListTile(
                 leading: const Icon(Icons.album),
-                title: Text(note.title),
+                title: Text(
+                  note.title,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 isThreeLine: true,
+                trailing: Text(note.subject),
                 subtitle: Text(note.description),
               ),
               Row(
