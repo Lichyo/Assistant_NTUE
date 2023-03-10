@@ -1,12 +1,23 @@
+import 'package:assistant/screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/screens/note/note_screen.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:assistant/components/menu_item_list.dart';
+import 'package:provider/provider.dart';
+import 'package:assistant/screen_controller.dart';
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class Home extends StatefulWidget {
+  Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   // ClassData classData = ClassData();
+  MenuItemList menuItemList = MenuItemList();
+  ScreenController screenController = ScreenController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,18 +48,12 @@ class Home extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const DrawHeader(),
-              Column(children: MenuItemList().menuItemList),
+              MenuItemList(),
             ],
           ),
         ),
       ),
-      body: Column(
-        children: const [
-          Expanded(
-            child: NoteScreen(),
-          ),
-        ],
-      ),
+      body: Provider.of<ScreenController>(context).getPage(),
     );
   }
 }

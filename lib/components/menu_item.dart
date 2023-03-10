@@ -1,29 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
+import 'package:provider/provider.dart';
 
-class MenuItem extends StatefulWidget {
+class MenuItem extends StatelessWidget {
   const MenuItem({
     super.key,
     required this.icon,
     required this.text,
+    required this.itemCallback,
   });
 
   final IconData icon;
   final String text;
+  final VoidCallback itemCallback;
 
-  @override
-  State<MenuItem> createState() => _MenuItemState();
-}
-
-class _MenuItemState extends State<MenuItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-
-        });
-      },
+      onTap: itemCallback,
       child: Container(
         padding: const EdgeInsets.only(left: 30.0, top: 20.0),
         width: double.infinity,
@@ -31,7 +25,7 @@ class _MenuItemState extends State<MenuItem> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Icon(
-              widget.icon,
+              icon,
               size: 30.0,
               color: Colors.grey.shade500,
             ),
@@ -39,7 +33,7 @@ class _MenuItemState extends State<MenuItem> {
               width: 50.0,
             ),
             Text(
-              widget.text,
+              text,
               style: kMenuTextStyle.copyWith(color: Colors.grey.shade600),
               textAlign: TextAlign.center,
             ),
