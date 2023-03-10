@@ -2,7 +2,6 @@ import 'package:assistant/screens/curriculum/basic_curriculum_screen.dart';
 import 'package:assistant/screens/note/note_screen.dart';
 import 'package:assistant/screens/profile/account_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'components/menu_item.dart';
 
 class ScreenController extends ChangeNotifier{
@@ -15,14 +14,17 @@ class ScreenController extends ChangeNotifier{
     const NoteScreen(),
   ];
 
-  Widget getPage() {
-    print('selectedPage = $selectedPage');
-    return screenList[selectedPage];
+  int getSelectedPage() {
+    return selectedPage;
+  }
+
+  Widget getPage(int index) {
+    return screenList[index];
   }
 
   void itemToggle(int index) {
     selectedPage = index;
-    print(selectedPage);
+    notifyListeners();
   }
 
   ScreenController(){

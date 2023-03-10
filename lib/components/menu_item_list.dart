@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:assistant/screen_controller.dart';
 
 class MenuItemList extends StatefulWidget {
-  MenuItemList({Key? key}) : super(key: key);
+  const MenuItemList({Key? key}) : super(key: key);
 
   @override
   State<MenuItemList> createState() => _MenuItemListState();
