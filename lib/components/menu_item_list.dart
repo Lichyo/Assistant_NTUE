@@ -16,8 +16,8 @@ class _MenuItemListState extends State<MenuItemList> {
     return Column(
       children: [
         MenuItem(
-          text: 'Profile',
-          icon: Icons.person,
+          text: 'Curriculum',
+          icon: Icons.list,
           itemCallback: () {
             setState(() {
               widget.callback(0);
@@ -25,8 +25,8 @@ class _MenuItemListState extends State<MenuItemList> {
           },
         ),
         MenuItem(
-          text: 'Curriculum',
-          icon: Icons.list,
+          text: 'Profile',
+          icon: Icons.person,
           itemCallback: () {
             setState(() {
               widget.callback(1);
@@ -42,7 +42,7 @@ class _MenuItemListState extends State<MenuItemList> {
             });
           },
         ),
-        // const Divider(height: 50),
+        const Divider(height: 30),
         MenuItem(
           text: 'Setting',
           icon: Icons.settings,

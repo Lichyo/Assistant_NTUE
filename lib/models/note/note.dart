@@ -2,7 +2,7 @@
 class Note {
   String title;
   String description;
-  DateTime deadTime;
+  String deadTime;
   String subject;
 
   Note({

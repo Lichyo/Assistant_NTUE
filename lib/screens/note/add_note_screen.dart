@@ -6,6 +6,7 @@ import 'package:assistant/components/rounded_button.dart';
 import 'package:assistant/models/note/note_data.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({Key? key}) : super(key: key);
@@ -170,7 +171,7 @@ class _AddNoteState extends State<AddNote> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay = focusedDay; // update `_focusedDay` here as well
+                      _focusedDay = focusedDay;
                     });
                   },
                 ),
@@ -185,7 +186,7 @@ class _AddNoteState extends State<AddNote> {
                     Provider.of<NoteData>(context, listen: false).addNote(
                       title: title,
                       description: description,
-                      deadTime: _selectedDay,
+                      deadTime: DateFormat.yMMMd().format(_selectedDay),
                       subject: selectedValue.toString(),
                     );
                     Navigator.pop(context);

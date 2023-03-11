@@ -2,7 +2,6 @@ import 'package:assistant/screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item_list.dart';
-import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -19,12 +18,15 @@ class _HomeState extends State<Home> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.lightBlue,
-          actions: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 30,
+          actions: [
+            Visibility(
+              visible: selectedPage == 0 ? true : false,
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Icon(
+                  Icons.calendar_month,
+                  size: 30,
+                ),
               ),
             ),
           ],

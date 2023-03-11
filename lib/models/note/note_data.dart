@@ -1,5 +1,5 @@
 import 'dart:collection';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'note.dart';
 
@@ -8,13 +8,12 @@ class NoteData extends ChangeNotifier {
     Note(
         title: 'Example',
         description: 'description',
-        deadTime: DateTime.now(),
+        deadTime: DateFormat.yMMMd().format(DateTime.now()),
         subject: 'Testing Subject'),
-
     Note(
         title: 'Example',
         description: 'description',
-        deadTime: DateTime.now(),
+        deadTime: DateFormat.yMMMd().format(DateTime.now()),
         subject: 'Testing Subject'),
   ];
 
