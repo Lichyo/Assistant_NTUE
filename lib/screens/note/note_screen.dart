@@ -10,15 +10,17 @@ class NoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const AddNote()));
-        },
-        child: const Icon(Icons.add),
+    return SafeArea(
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => const AddNote()));
+          },
+          child: const Icon(Icons.add),
+        ),
+        body: const NoteList(),
       ),
-      body: const NoteList(),
     );
   }
 }

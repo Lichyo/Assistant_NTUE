@@ -10,6 +10,12 @@ class NoteData extends ChangeNotifier {
         description: 'description',
         deadTime: DateTime.now(),
         subject: 'Testing Subject'),
+
+    Note(
+        title: 'Example',
+        description: 'description',
+        deadTime: DateTime.now(),
+        subject: 'Testing Subject'),
   ];
 
   void addNote({title, description, deadTime, subject}) {
