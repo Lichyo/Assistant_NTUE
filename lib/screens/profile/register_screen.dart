@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final _auth = FirebaseAuth.instance;
   String ID = "";
   String password = "";
   String name = "";
@@ -119,9 +121,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
               ),
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Home()));
+              onPressed: () async{
+                try {
+                  await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Home()));
+                }
+                catch(e) {
+                  print(e);
+                }
               },
               child: const Text(
                 'Submit',
