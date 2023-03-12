@@ -5,6 +5,7 @@ import 'package:assistant/constant.dart';
 import 'package:assistant/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -84,8 +85,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   email = value;
                 },
                 keyboardType: TextInputType.emailAddress,
-                decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your email'),
+                decoration: kTextFieldDecoration.copyWith(
+                    labelText: 'Enter your email'),
               ),
             ),
             Padding(
@@ -140,7 +141,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       showSpinner = false;
                     });
                   } catch (e) {
-                    print(e);
+                    Alert(context: context, title: "註冊失敗", desc: e.toString()).show();
+                    setState(() {
+                      showSpinner = false;
+                    });
                   }
                 },
                 child: const Text(

@@ -5,6 +5,7 @@ import 'package:assistant/constant.dart';
 import 'package:assistant/screens/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -115,7 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = false;
                     });
                   } catch (e) {
-                    print(e);
+                    Alert(context: context, title: "註冊失敗", desc: e.toString()).show();
+                    setState(() {
+                      showSpinner = false;
+                    });
                   }
                   Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => const Home()));
