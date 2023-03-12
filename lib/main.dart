@@ -1,8 +1,11 @@
+import 'package:assistant/screens/profile/account_screen.dart';
+import 'package:assistant/screens/profile/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'models/note/note_data.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'screens/profile/account_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

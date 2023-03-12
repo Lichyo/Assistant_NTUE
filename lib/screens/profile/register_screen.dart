@@ -121,13 +121,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
               ),
-              onPressed: () async{
+              onPressed: () async {
                 try {
-                  await _auth.createUserWithEmailAndPassword(email: email, password: password);
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Home()));
-                }
-                catch(e) {
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  if (newUser != null) {
+                    setState(() {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Home()));
+                    });
+                  }
+                } catch (e) {
                   print(e);
                 }
               },

@@ -22,9 +22,7 @@ class _HomeState extends State<Home> {
   void getCurrentUser() {
     try {
       final user = _auth.currentUser;
-      if (user != null) {
-        print(user.email);
-      }
+      if (user != null) {}
     } catch (e) {
       print(e);
     }
