@@ -111,18 +111,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         email: ID, password: password);
                     if(user != null) {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Home()));
+                      setState(() {
+                        showSpinner = false;
+                      });
+                      print('log in');
                     }
-                    setState(() {
-                      showSpinner = false;
-                    });
                   } catch (e) {
-                    Alert(context: context, title: "註冊失敗", desc: e.toString()).show();
                     setState(() {
+                      Alert(context: context, title: "註冊失敗", desc: e.toString()).show();
                       showSpinner = false;
                     });
                   }
-                  Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Home()));
                 },
                 child: const Text(
                   'Submit',
