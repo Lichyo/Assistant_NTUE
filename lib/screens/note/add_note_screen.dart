@@ -19,17 +19,18 @@ ClassData classData = ClassData();
 class _AddNoteState extends State<AddNote> {
   List<String> items = classData.getClassName();
   String? selectedValue;
-  late String title;
-  late String description;
+  String title = '';
+  String description = '';
   var _selectedDay;
-  var _focusedDay;
-
+  _AddNoteState() {
+    items.add('其他');
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        resizeToAvoidBottomInset : false,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.lightBlue,
           title: const Text(
@@ -160,7 +161,8 @@ class _AddNoteState extends State<AddNote> {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 30.0, vertical: 15.0),
                 child: TableCalendar(
                   firstDay: DateTime(2020),
                   focusedDay: DateTime.now(),
@@ -171,14 +173,13 @@ class _AddNoteState extends State<AddNote> {
                   onDaySelected: (selectedDay, focusedDay) {
                     setState(() {
                       _selectedDay = selectedDay;
-                      _focusedDay = focusedDay;
                     });
                   },
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 30.0, vertical: 15.0),
                 child: RoundedButton(
                   title: 'Submit',
                   color: Colors.lightBlue,

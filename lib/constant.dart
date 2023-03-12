@@ -38,4 +38,11 @@ const kMenuTextStyle = TextStyle(
   fontSize: 18.0,
 );
 
+const kLittleTitleTextStyle = TextStyle(
+  fontSize: 18.0,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+
+);
+
 enum Week {mon, tues, wed, thur, fri}

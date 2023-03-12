@@ -7,7 +7,7 @@ class Note {
 
   Note({
     required this.title,
-    required this.description,
+    this.description = '',
     required this.deadTime,
     required this.subject,
   });
