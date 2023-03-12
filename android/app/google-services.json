@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "144171302263",
+    "project_id": "assistant-f84e1",
+    "storage_bucket": "assistant-f84e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144171302263:android:4a5087b69a162499ca3572",
+        "android_client_info": {
+          "package_name": "com.ntue.assistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144171302263-37qhm1sr3c2elop9t6tcla09m5t067i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD85LdcPS-JeKWDCwEiuOBfRSE7_8KFm9Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "144171302263-37qhm1sr3c2elop9t6tcla09m5t067i7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
