@@ -187,7 +187,7 @@ class _AddNoteState extends State<AddNote> {
                     Provider.of<NoteData>(context, listen: false).addNote(
                       title: title,
                       description: description,
-                      deadTime: DateFormat.yMMMd().format(_selectedDay),
+                      deadTime: _selectedDay,
                       subject: selectedValue.toString(),
                     );
                     Navigator.pop(context);

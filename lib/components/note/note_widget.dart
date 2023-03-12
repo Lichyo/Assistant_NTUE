@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
+import 'package:intl/intl.dart';
 
 class NoteWidget extends StatelessWidget {
-  const NoteWidget({super.key, required this.note});
+  NoteWidget({super.key, required this.note});
   final Note note;
 
   @override
@@ -13,7 +14,16 @@ class NoteWidget extends StatelessWidget {
           child: Column(
             children: [
               ListTile(
-                leading: const Icon(Icons.album),
+                leading: Container(
+                  width: 40.0,
+                  height: 30.0,
+                  child: FittedBox(
+                    child: Text(
+                      note.getLastTime().inDays.toString(),
+                      style: const TextStyle(color: Colors.red),
+                    ),
+                  ),
+                ),
                 title: Text(
                   note.title,
                   style: const TextStyle(
@@ -28,7 +38,9 @@ class NoteWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(note.deadTime.toString()),
+                  Text(
+                    DateFormat.yMMMd().format(note.deadTime),
+                  ),
                   const SizedBox(
                     width: 15.0,
                   ),

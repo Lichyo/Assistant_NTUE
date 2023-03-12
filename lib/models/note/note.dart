@@ -2,7 +2,7 @@
 class Note {
   String title;
   String description;
-  String deadTime;
+  DateTime deadTime;
   String subject;
 
   Note({
@@ -11,4 +11,9 @@ class Note {
     required this.deadTime,
     required this.subject,
   });
+
+  Duration getLastTime() {
+    final Duration duration = deadTime.difference(DateTime.now());
+    return duration;
+  }
 }

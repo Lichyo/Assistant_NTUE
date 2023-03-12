@@ -8,12 +8,12 @@ class NoteData extends ChangeNotifier {
     Note(
         title: 'Example',
         description: 'description',
-        deadTime: DateFormat.yMMMd().format(DateTime.now()),
+        deadTime: DateTime.now(),
         subject: 'Testing Subject'),
     Note(
         title: 'Example',
         description: 'description',
-        deadTime: DateFormat.yMMMd().format(DateTime.now()),
+        deadTime: DateTime.now(),
         subject: 'Testing Subject'),
   ];
 
