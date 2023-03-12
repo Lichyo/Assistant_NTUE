@@ -16,6 +16,7 @@ dependencies:
   table_calendar: ^3.0.9
   cloud_firestore: ^4.4.4
   firebase_auth: ^4.0.0
+  modal_progress_hud_nsn: ^0.3.0
 
 
 dev_dependencies:

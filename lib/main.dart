@@ -22,7 +22,7 @@ class App extends StatelessWidget {
       create: (_) => NoteData(),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Home(),
+        home: AccountScreen(),
       ),
     );
   }

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/screens/home_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _auth = FirebaseAuth.instance;
   String ID = "";
   String password = "";
   bool isObscure = false;
@@ -68,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: kTextFieldDecoration.copyWith(
                 labelText: 'Enter your password',
                 suffix: GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       isObscure = !isObscure;
                     });
@@ -94,8 +96,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
               ),
-              onPressed: () {
+              onPressed: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
+                try {
+                  final user = await _auth.signInWithEmailAndPassword(
+                      email: ID, password: password);
+                  if(user != null) {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Home()));
+                  }
+                  setState(() {});
+                } catch (e) {
+                  print(e);
+                }
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Home()));
               },
