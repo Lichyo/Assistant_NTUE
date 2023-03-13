@@ -184,7 +184,7 @@ class _AddNoteState extends State<AddNote> {
                   title: 'Submit',
                   color: Colors.lightBlue,
                   onPressed: () {
-                    Provider.of<NoteData>(context, listen: false).addNote(
+                    Provider.of<NoteData>(context, listen: false).addNoteAndSort(
                       title: title,
                       description: description,
                       deadTime: _selectedDay,

@@ -12,7 +12,7 @@ class NoteData extends ChangeNotifier {
     Note(
         title: 'Example2',
         description: 'description',
-        deadTime: DateTime(2023, 1, 20),
+        deadTime: DateTime(2023, 3, 20),
         subject: 'Testing Subject'),
     Note(
         title: 'Example3',
@@ -22,7 +22,7 @@ class NoteData extends ChangeNotifier {
     Note(
         title: 'Example4',
         description: 'description',
-        deadTime: DateTime(2023, 3, 20),
+        deadTime: DateTime(2023, 3, 30),
         subject: 'Testing Subject'),
     Note(
         title: 'Example5',
@@ -39,7 +39,7 @@ class NoteData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addNote({title, description, deadTime, subject}) {
+  void addNoteAndSort({title, description, deadTime, subject}) {
     final Note note = Note(
       title: title,
       description: description,
@@ -47,6 +47,7 @@ class NoteData extends ChangeNotifier {
       subject: subject,
     );
     notes.add(note);
+    notes = getSortedNoteData();
     notifyListeners();
   }
 
