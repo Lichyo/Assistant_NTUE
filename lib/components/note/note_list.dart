@@ -14,12 +14,7 @@ class NoteList extends StatelessWidget {
         itemBuilder: (context, index) {
           final Note note = noteData.sortedNoteData[index];
           return NoteWidget(
-            note: Note(
-              subject: note.subject,
-              title: note.title,
-              description: note.description,
-              deadTime: note.deadTime,
-            ),
+            note: note,
           );
         },
       );

@@ -5,27 +5,27 @@ import 'note.dart';
 class NoteData extends ChangeNotifier {
   List<Note> notes = [
     Note(
-        title: 'Example',
+        title: 'Example1',
         description: 'description',
         deadTime: DateTime(2023, 4, 20),
         subject: 'Testing Subject'),
     Note(
-        title: 'Example',
+        title: 'Example2',
         description: 'description',
         deadTime: DateTime(2023, 1, 20),
         subject: 'Testing Subject'),
     Note(
-        title: 'Example',
+        title: 'Example3',
         description: 'description',
         deadTime: DateTime(2023, 3, 21),
         subject: 'Testing Subject'),
     Note(
-        title: 'Example',
+        title: 'Example4',
         description: 'description',
         deadTime: DateTime(2023, 3, 20),
         subject: 'Testing Subject'),
     Note(
-        title: 'Example',
+        title: 'Example5',
         description: 'description',
         deadTime: DateTime(2023, 3, 24),
         subject: 'Testing Subject'),
