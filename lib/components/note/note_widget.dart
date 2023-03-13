@@ -5,74 +5,66 @@ import 'package:assistant/models/note/note.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class NoteWidget extends StatefulWidget {
-  NoteWidget({super.key, required this.note});
+class NoteWidget extends StatelessWidget {
+  const NoteWidget({super.key, required this.note});
   final Note note;
 
   @override
-  State<NoteWidget> createState() => _NoteWidgetState();
-}
-
-class _NoteWidgetState extends State<NoteWidget> {
-  @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: (){
-        Provider.of<NoteData>(context, listen:  false).removeNote(note: widget.note);
+    return GestureDetector(
+      onLongPress: () {
+          Provider.of<NoteData>(context, listen: false).removeNote(note: note);
       },
-      child: GestureDetector(
-        onLongPress: (){},
-        child: Column(
-          children: [
-            Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: Container(
-                      width: 50.0,
-                      height: 40.0,
-                      child: FittedBox(
-                        child: Text(
-                          widget.note.getLastTime().inDays.toString(),
-                          style: const TextStyle(color: Colors.red),
-                        ),
+      child: Column(
+        children: [
+          Card(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: SizedBox(
+                    width: 50.0,
+                    height: 40.0,
+                    child: FittedBox(
+                      child: Text(
+                        note.getLastTime().inDays.toString(),
+                        style: const TextStyle(color: Colors.red),
                       ),
-                    ),
-                    title: Text(
-                      widget.note.title,
-                      style: kNoteTitleTextStyle,
-                    ),
-                    isThreeLine: true,
-                    trailing: Text(widget.note.subject),
-                    subtitle: Text(
-                      widget.note.description,
-                      style: kNoteDescriptionTextStyle,
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        DateFormat.yMMMd().format(widget.note.deadTime),
-                      ),
-                      const SizedBox(
-                        width: 15.0,
-                      ),
-                    ],
+                  title: Text(
+                    note.title,
+                    style: kNoteTitleTextStyle,
                   ),
-                ],
-              ),
+                  isThreeLine: true,
+                  trailing: Text(note.subject),
+                  subtitle: Text(
+                    note.description,
+                    style: kNoteDescriptionTextStyle,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      DateFormat.yMMMd().format(note.deadTime),
+                    ),
+                    const SizedBox(
+                      width: 15.0,
+                    ),
+                  ],
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Divider(
-                color: Colors.grey.shade200,
-                thickness: 2.0,
-                height: 5.0,
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5.0),
+            child: Divider(
+              color: Colors.grey.shade200,
+              thickness: 2.0,
+              height: 5.0,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

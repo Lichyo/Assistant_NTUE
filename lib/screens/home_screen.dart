@@ -86,8 +86,8 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: screenController.screenList[selectedPage],
-      // body: const NoteScreen(),
+      // body: screenController.screenList[selectedPage],
+      body: const NoteScreen(),
     );
   }
 }
