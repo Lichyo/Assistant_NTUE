@@ -1,5 +1,6 @@
 import 'package:assistant/screen_controller.dart';
 import 'package:assistant/screens/curriculum/calendar_curriculum_screen.dart';
+import 'package:assistant/screens/note/note_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item_list.dart';
@@ -86,6 +87,7 @@ class _HomeState extends State<Home> {
         ),
       ),
       body: screenController.screenList[selectedPage],
+      // body: const NoteScreen(),
     );
   }
 }

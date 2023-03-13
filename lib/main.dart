@@ -1,3 +1,4 @@
+import 'package:assistant/screens/home_screen.dart';
 import 'package:assistant/screens/note/note_screen.dart';
 import 'package:assistant/screens/profile/account_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class App extends StatelessWidget {
       create: (_) => NoteData(),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: NoteScreen(),
+        home: Home(),
       ),
     );
   }
