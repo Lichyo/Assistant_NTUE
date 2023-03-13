@@ -42,7 +42,18 @@ const kLittleTitleTextStyle = TextStyle(
   fontSize: 18.0,
   fontWeight: FontWeight.w500,
   color: Colors.black,
-
 );
 
-enum Week {mon, tues, wed, thur, fri}
+const kNoteTitleTextStyle = TextStyle(
+  fontSize: 23.0,
+  fontWeight: FontWeight.w500,
+  color: Colors.black,
+);
+
+const kNoteDescriptionTextStyle = TextStyle(
+  fontWeight: FontWeight.w400,
+  fontSize: 15.0,
+  color: Colors.grey,
+);
+
+enum Week { mon, tues, wed, thur, fri }

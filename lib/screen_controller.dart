@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'screens/setting/setting_screen.dart';
 import 'screens/notification/notification_screen.dart';
 import 'screens/issue_report_screen/issue_report_screen.dart';
+import 'screens/curriculum/calendar_curriculum_screen.dart';
 
 class ScreenController{
   int selectedPage = 0;
   List<Widget> menuList = [];
+  //TODO: twist screenList to map data Structure
   List<Widget> screenList = [
     const BasicCurriculumScreen(),
     const AccountScreen(),
@@ -16,6 +18,7 @@ class ScreenController{
     const SettingScreen(),
     const NotificationScreen(),
     const IssueReportScreen(),
+    const CalendarCurriculumScreen(),
   ];
 
   Widget getPage() {

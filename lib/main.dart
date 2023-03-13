@@ -1,12 +1,11 @@
+import 'package:assistant/screens/note/note_screen.dart';
 import 'package:assistant/screens/profile/account_screen.dart';
-import 'package:assistant/screens/profile/register_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
 import 'package:provider/provider.dart';
 import 'models/note/note_data.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'screens/profile/account_screen.dart';
 import 'testing.dart';
+import 'screens/curriculum/basic_curriculum_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +22,7 @@ class App extends StatelessWidget {
       create: (_) => NoteData(),
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: AccountScreen(),
+        home: NoteScreen(),
       ),
     );
   }

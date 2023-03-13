@@ -1,4 +1,5 @@
 import 'package:assistant/screen_controller.dart';
+import 'package:assistant/screens/curriculum/calendar_curriculum_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item_list.dart';
@@ -38,11 +39,20 @@ class _HomeState extends State<Home> {
         actions: [
           Visibility(
             visible: selectedPage == 0 ? true : false,
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Icon(
-                Icons.calendar_month,
-                size: 30,
+            child: GestureDetector(
+              onTap: () {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => const CalendarCurriculumScreen()));
+                setState(() {
+                  selectedPage = 6;
+                });
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Icon(
+                  Icons.calendar_month,
+                  size: 30,
+                ),
               ),
             ),
           ),

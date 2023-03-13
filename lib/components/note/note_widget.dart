@@ -1,3 +1,4 @@
+import 'package:assistant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 import 'package:intl/intl.dart';
@@ -15,8 +16,8 @@ class NoteWidget extends StatelessWidget {
             children: [
               ListTile(
                 leading: Container(
-                  width: 40.0,
-                  height: 30.0,
+                  width: 50.0,
+                  height: 40.0,
                   child: FittedBox(
                     child: Text(
                       note.getLastTime().inDays.toString(),
@@ -26,14 +27,14 @@ class NoteWidget extends StatelessWidget {
                 ),
                 title: Text(
                   note.title,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: kNoteTitleTextStyle,
                 ),
                 isThreeLine: true,
                 trailing: Text(note.subject),
-                subtitle: Text(note.description),
+                subtitle: Text(
+                  note.description,
+                  style: kNoteDescriptionTextStyle,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,

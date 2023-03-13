@@ -10,9 +10,9 @@ class NoteList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<NoteData>(builder: (context, noteData, child) {
       return ListView.builder(
-        itemCount: noteData.notes.length,
+        itemCount: noteData.sortedNoteData.length,
         itemBuilder: (context, index) {
-          final Note note = noteData.notes[index];
+          final Note note = noteData.sortedNoteData[index];
           return NoteWidget(
             note: Note(
               subject: note.subject,

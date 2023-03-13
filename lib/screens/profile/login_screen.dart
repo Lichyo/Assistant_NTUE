@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
-  String ID = "";
+  String email = "";
   String password = "";
   bool isObscure = true;
   bool showSpinner = false;
@@ -57,11 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 vertical: 5.0,
               ),
               child: TextField(
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.emailAddress,
                 decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
+                    kTextFieldDecoration.copyWith(labelText: 'Enter your email'),
                 onChanged: (value) {
-                  ID = value;
+                  email = value;
                 },
               ),
             ),
@@ -108,7 +108,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   FocusManager.instance.primaryFocus?.unfocus();
                   try {
                     final user = await _auth.signInWithEmailAndPassword(
-                        email: ID, password: password);
+                        email: email, password: password);
                     if(user != null) {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Home()));
                       setState(() {
