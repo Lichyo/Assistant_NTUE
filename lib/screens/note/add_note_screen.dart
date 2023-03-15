@@ -21,6 +21,7 @@ class _AddNoteState extends State<AddNote> {
   String? selectedValue;
   String title = '';
   String description = '';
+  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   var _selectedDay;
   _AddNoteState() {
     items.add('其他');
@@ -28,175 +29,183 @@ class _AddNoteState extends State<AddNote> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          backgroundColor: Colors.lightBlue,
-          title: const Text(
-            'Add Note',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
+        title: const Text(
+          'Add Note',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
-                child: TextField(
-                  onChanged: (value) {
-                    title = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      labelText: 'Enter your title'),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 10.0, left: 30.0, right: 30.0, bottom: 10.0),
-                child: TextField(
-                  onChanged: (value) {
-                    description = value;
-                  },
-                  decoration: kTextFieldDecoration.copyWith(
-                      labelText: 'Enter your Description'),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30.0, vertical: 5.0),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton2(
-                    isExpanded: true,
-                    hint: Row(
-                      children: const [
-                        Icon(
-                          Icons.list,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Expanded(
-                          child: Text(
-                            'Select Subject',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
-                    ),
-                    items: items
-                        .map((item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Text(
-                                item,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ))
-                        .toList(),
-                    value: selectedValue,
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 30.0, left: 30.0, right: 30.0, bottom: 10.0),
+                  child: TextField(
                     onChanged: (value) {
-                      setState(() {
-                        selectedValue = value as String;
-                      });
+                      title = value;
                     },
-                    buttonStyleData: ButtonStyleData(
-                      height: 50,
-                      width: 300,
-                      padding: const EdgeInsets.only(left: 14, right: 14),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(
-                          color: Colors.black26,
+                    decoration: kTextFieldDecoration.copyWith(
+                        labelText: 'Enter your title'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 10.0, left: 30.0, right: 30.0, bottom: 10.0),
+                  child: TextField(
+                    onChanged: (value) {
+                      description = value;
+                    },
+                    decoration: kTextFieldDecoration.copyWith(
+                        labelText: 'Enter your Description'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 5.0),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      isExpanded: true,
+                      hint: Row(
+                        children: const [
+                          Icon(
+                            Icons.list,
+                            size: 16,
+                            color: Colors.white,
+                          ),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Select Subject',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                      items: items
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ))
+                          .toList(),
+                      value: selectedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedValue = value as String;
+                        });
+                      },
+                      buttonStyleData: ButtonStyleData(
+                        height: 50,
+                        padding: const EdgeInsets.only(left: 14, right: 14),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(
+                            color: Colors.black26,
+                          ),
+                          color: Colors.grey,
                         ),
-                        color: Colors.grey,
+                        elevation: 2,
                       ),
-                      elevation: 2,
-                    ),
-                    iconStyleData: const IconStyleData(
-                      icon: Icon(
-                        Icons.arrow_forward_ios_outlined,
+                      iconStyleData: const IconStyleData(
+                        icon: Icon(
+                          Icons.arrow_forward_ios_outlined,
+                        ),
+                        iconSize: 14,
+                        iconEnabledColor: Colors.white,
+                        iconDisabledColor: Colors.grey,
                       ),
-                      iconSize: 14,
-                      iconEnabledColor: Colors.white,
-                      iconDisabledColor: Colors.grey,
-                    ),
-                    dropdownStyleData: DropdownStyleData(
-                      maxHeight: 200,
-                      width: 200,
-                      padding: null,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Colors.grey,
+                      dropdownStyleData: DropdownStyleData(
+                        maxHeight: 200,
+                        width: 200,
+                        padding: null,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: Colors.grey,
+                        ),
+                        elevation: 8,
+                        offset: const Offset(-20, 0),
+                        scrollbarTheme: ScrollbarThemeData(
+                          radius: const Radius.circular(40),
+                          thickness: MaterialStateProperty.all<double>(6),
+                          thumbVisibility:
+                              MaterialStateProperty.all<bool>(true),
+                        ),
                       ),
-                      elevation: 8,
-                      offset: const Offset(-20, 0),
-                      scrollbarTheme: ScrollbarThemeData(
-                        radius: const Radius.circular(40),
-                        thickness: MaterialStateProperty.all<double>(6),
-                        thumbVisibility: MaterialStateProperty.all<bool>(true),
+                      menuItemStyleData: const MenuItemStyleData(
+                        height: 40,
+                        padding: EdgeInsets.only(left: 14, right: 14),
                       ),
-                    ),
-                    menuItemStyleData: const MenuItemStyleData(
-                      height: 40,
-                      padding: EdgeInsets.only(left: 14, right: 14),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 30.0, vertical: 15.0),
-                child: TableCalendar(
-                  firstDay: DateTime(2020),
-                  focusedDay: DateTime.now(),
-                  lastDay: DateTime(2030),
-                  selectedDayPredicate: (day) {
-                    return isSameDay(_selectedDay, day);
-                  },
-                  onDaySelected: (selectedDay, focusedDay) {
-                    setState(() {
-                      _selectedDay = selectedDay;
-                    });
-                  },
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 30.0, vertical: 15.0),
+                  child: TableCalendar(
+                    firstDay: DateTime(2020),
+                    focusedDay: DateTime.now(),
+                    lastDay: DateTime(2030),
+                    selectedDayPredicate: (day) {
+                      return isSameDay(_selectedDay, day);
+                    },
+                    onDaySelected: (selectedDay, focusedDay) {
+                      setState(() {
+                        _selectedDay = selectedDay;
+                      });
+                    },
+                    calendarFormat: _calendarFormat,
+                    onFormatChanged: (format) {
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    },
+                  ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 30.0, vertical: 15.0),
-                child: RoundedButton(
-                  title: 'Submit',
-                  color: Colors.lightBlue,
-                  onPressed: () {
-                    Provider.of<NoteData>(context, listen: false).addNoteAndSort(
-                      title: title,
-                      description: description,
-                      deadTime: _selectedDay,
-                      subject: selectedValue.toString(),
-                    );
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
+            child: RoundedButton(
+              title: 'Submit',
+              color: Colors.lightBlue,
+              onPressed: () {
+                Provider.of<NoteData>(context, listen: false).addNoteAndSort(
+                  title: title,
+                  description: description,
+                  deadTime: _selectedDay,
+                  subject: selectedValue.toString(),
+                );
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

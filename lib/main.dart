@@ -1,3 +1,4 @@
+import 'package:assistant/screens/curriculum/calendar_curriculum_screen.dart';
 import 'package:assistant/screens/home_screen.dart';
 import 'package:assistant/screens/note/note_screen.dart';
 import 'package:assistant/screens/profile/account_screen.dart';

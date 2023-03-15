@@ -18,7 +18,7 @@ class ScreenController{
     const SettingScreen(),
     const NotificationScreen(),
     const IssueReportScreen(),
-    const CalendarCurriculumScreen(),
+    // const CalendarCurriculumScreen(),
   ];
 
   Widget getPage() {

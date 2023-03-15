@@ -13,7 +13,7 @@ class NoteWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: () {
-          Provider.of<NoteData>(context, listen: false).removeNote(note: note);
+        Provider.of<NoteData>(context, listen: false).removeNote(note: note);
       },
       child: Column(
         children: [
