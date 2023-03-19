@@ -1,15 +1,8 @@
-import 'package:assistant/screens/curriculum/calendar_curriculum_screen.dart';
 import 'package:assistant/screens/home_screen.dart';
-import 'package:assistant/screens/note/note_screen.dart';
 import 'package:assistant/screens/profile/account_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'models/note/note_data.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'testing.dart';
 import 'package:flutter/services.dart';
-import 'screens/curriculum/basic_curriculum_screen.dart';
-
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,22 +21,19 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => NoteData(),
-      child: MaterialApp(
-        title: title,
-        themeMode: ThemeMode.light,
-        theme: ThemeData(
-          primaryColor: Colors.black,
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-          ),
+    return MaterialApp(
+      title: title,
+      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+        primaryColor: Colors.black,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
-        debugShowCheckedModeBanner: false,
-        home: const Home(),
       ),
+      debugShowCheckedModeBanner: false,
+      home: const AccountScreen(),
     );
   }
 }

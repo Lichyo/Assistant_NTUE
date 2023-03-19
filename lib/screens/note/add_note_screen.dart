@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:assistant/components/rounded_button.dart';
-import 'package:assistant/models/note/note_data.dart';
-import 'package:provider/provider.dart';
+import 'package:assistant/db/NoteDB.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:intl/intl.dart';
+import 'package:assistant/models/note/note.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({Key? key}) : super(key: key);
@@ -194,13 +193,14 @@ class _AddNoteState extends State<AddNote> {
             child: RoundedButton(
               title: 'Submit',
               color: Colors.lightBlue,
-              onPressed: () {
-                Provider.of<NoteData>(context, listen: false).addNoteAndSort(
+              onPressed: () async {
+                final db = NoteDB.instance;
+                db.create(Note(
                   title: title,
                   description: description,
                   deadTime: _selectedDay,
                   subject: selectedValue.toString(),
-                );
+                ));
                 Navigator.pop(context);
               },
             ),

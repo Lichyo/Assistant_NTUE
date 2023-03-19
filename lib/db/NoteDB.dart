@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:assistant/db/note.dart';
+import 'package:assistant/models/note/note.dart';
 
 class NoteDB {
   static final NoteDB instance = NoteDB._init();
@@ -19,17 +19,16 @@ class NoteDB {
   }
 
   Future _createDB(Database db, int version) async {
-    const String idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    const String textType = 'STRING NOT  NULL';
-    await db.execute('''CREATE TABLE 
-      $noteTable (
-      ${NoteField.id} $idType,
-      ${NoteField.title} $textType,
-      ${NoteField.description} $textType,
-      ${NoteField.subject} $textType,
-      ${NoteField.deadTime} $textType, 
-      )
-      ''');
+    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    const textType = 'TEXT NOT NULL';
+    await db.execute(''' CREATE TABLE $noteTable ( 
+  ${NoteField.id} $idType, 
+  ${NoteField.title} $textType,
+  ${NoteField.description} $textType,
+  ${NoteField.subject} $textType,
+  ${NoteField.deadTime} $textType
+  )
+''');
   }
 
   Future<Note> create(Note note) async {
@@ -53,7 +52,7 @@ class NoteDB {
     }
   }
 
-  Future<List<Note>> readAllNote() async {
+  Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
     const orderBy = '${NoteField.deadTime} ASC';
     final result = await db.query(noteTable, orderBy: orderBy);

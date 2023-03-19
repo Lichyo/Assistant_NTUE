@@ -5,37 +5,26 @@ import 'note.dart';
 class NoteData extends ChangeNotifier {
   List<Note> notes = [
     Note(
-        title: 'Example1',
-        description: 'description',
-        deadTime: DateTime(2023, 4, 20),
-        subject: 'Testing Subject'),
+        title: 'Tap to navigate into description',
+        description: 'Task 1',
+        deadTime: DateTime.now().add(
+          const Duration(days: 2),
+        ),
+        subject: 'System Task'),
     Note(
-        title: 'Example2',
-        description: 'description',
-        deadTime: DateTime(2023, 3, 20),
-        subject: 'Testing Subject'),
-    Note(
-        title: 'Example3',
-        description: 'description',
-        deadTime: DateTime(2023, 3, 21),
-        subject: 'Testing Subject'),
-    Note(
-        title: 'Example4',
-        description: 'description',
-        deadTime: DateTime(2023, 3, 30),
-        subject: 'Testing Subject'),
-    Note(
-        title: 'Example5',
-        description: 'description',
-        deadTime: DateTime(2023, 3, 24),
-        subject: 'Testing Subject'),
+        title: 'Long pressed to remove this note',
+        description: 'Task 2',
+        deadTime: DateTime.now().add(
+          const Duration(days: 3),
+        ),
+        subject: 'System Task'),
   ];
   List<Note> sortedNoteData = [];
   NoteData() {
-     sortedNoteData = getSortedNoteData();
-     for (int i = 0; i < notes.length; i++) {
-       print(sortedNoteData[i].deadTime);
-     }
+    sortedNoteData = getSortedNoteData();
+    for (int i = 0; i < notes.length; i++) {
+      print(sortedNoteData[i].deadTime);
+    }
     notifyListeners();
   }
 
