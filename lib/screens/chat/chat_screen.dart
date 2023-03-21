@@ -76,7 +76,6 @@ class _ChatScreenState extends State<ChatScreen> {
                   TextButton(
                     onPressed: () async {
                       await _firestore.collection(widget.className).add({
-                        'class': widget.className,
                         'text': messageText,
                         'senderEmail': senderEmail,
                         'sendingTime': DateTime.now(),
