@@ -3,6 +3,7 @@ import 'package:assistant/screens/profile/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+import 'screens/chat/chat_screen.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/screens/chat/chat_screen.dart';
 
 class ClassContainer extends StatelessWidget {
   const ClassContainer({
@@ -11,7 +12,12 @@ class ClassContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: (){},
+      onPressed: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ChatScreen(
+                  className: curriculum.className,
+                )));
+      },
       child: ListTile(
         title: Text(
           curriculum.className,
