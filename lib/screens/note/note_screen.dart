@@ -50,13 +50,22 @@ class _NoteScreenState extends State<NoteScreen> {
           child: isLoad
               ? const CircularProgressIndicator()
               : notes.isEmpty
-                  ? const Text('Note is empty',style: TextStyle(fontSize: 30.0),)
+                  ? const Text(
+                      'Note is empty',
+                      style: TextStyle(fontSize: 30.0),
+                    )
                   : ListView.builder(
                       itemCount: notes.length,
                       itemBuilder: (context, index) {
                         final Note note = notes[index];
                         return NoteWidget(
                           note: note,
+                          noteCallback: () async {
+                            final db = NoteDB.instance;
+                            db.delete(note.id!);
+                            refreshNotes();
+                            print('Hello');
+                          },
                         );
                       },
                     ),
