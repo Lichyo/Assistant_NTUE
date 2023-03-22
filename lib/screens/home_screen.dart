@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:assistant/screens/account/account_screen.dart';
+import 'package:assistant/constant.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,11 +15,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  User? user;
+  ScreenController screenController = ScreenController();
+  ScreenIndex selectedPage = ScreenIndex.curriculum; // default
   final _auth = FirebaseAuth.instance;
   @override
   void initState() {
     super.initState();
     getCurrentUser();
+    onRefresh(FirebaseAuth.instance.currentUser);
+  }
+
+  onRefresh(currUser) {
+    setState(() {
+      user = currUser;
+    });
   }
 
   void getCurrentUser() {
@@ -29,8 +41,6 @@ class _HomeState extends State<Home> {
     }
   }
 
-  int selectedPage = 0;
-  ScreenController screenController = ScreenController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +48,11 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.lightBlue,
         actions: [
           Visibility(
-            visible: selectedPage == 0 ? true : false,
+            visible: selectedPage == ScreenIndex.curriculum ? true : false,
             child: GestureDetector(
               onTap: () {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => const CalendarCurriculumScreen()));
                 setState(() {
-                  selectedPage = 6;
+                  selectedPage = ScreenIndex.calendar;
                 });
               },
               child: const Padding(
@@ -73,19 +81,18 @@ class _HomeState extends State<Home> {
             children: [
               const DrawHeader(),
               MenuItemList(
-                screenController: screenController,
                 callback: (value) {
-                  setState(() {
-                    selectedPage = value;
-                    Navigator.pop(context);
-                  });
+                  print(value);
+
                 },
               ),
             ],
           ),
         ),
       ),
-      body: screenController.screenList[selectedPage],
+      body: user != null
+          ? screenController.getPage(selectedPage)
+          : const AccountScreen(),
     );
   }
 }

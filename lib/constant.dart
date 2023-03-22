@@ -79,3 +79,5 @@ const kTextFieldTextStyle = TextStyle(
 );
 
 enum Week { mon, tues, wed, thur, fri }
+
+enum ScreenIndex {curriculum, account, note, setting, notification, issueReport, logOut, calendar}

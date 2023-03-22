@@ -1,5 +1,4 @@
 import 'package:assistant/screens/home_screen.dart';
-import 'package:assistant/screens/profile/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +33,7 @@ class App extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: const AccountScreen(),
+      home: const Home(),
     );
   }
 }
