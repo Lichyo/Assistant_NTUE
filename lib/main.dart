@@ -16,24 +16,22 @@ Future main() async {
 }
 
 class App extends StatelessWidget {
-  static const String title = 'Notes SQLite';
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      themeMode: ThemeMode.dark,
-      theme: ThemeData(
-        primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-      ),
+    return const MaterialApp(
+      // themeMode: ThemeMode.dark,
+      // theme: ThemeData(
+      //   primaryColor: Colors.black,
+      //   scaffoldBackgroundColor: Colors.white,
+      //   appBarTheme: const AppBarTheme(
+      //     backgroundColor: Colors.transparent,
+      //     elevation: 0,
+      //   ),
+      // ),
       debugShowCheckedModeBanner: false,
-      home: const Home(),
+      home: Home(),
     );
   }
 }
