@@ -32,6 +32,13 @@ class _HomeState extends State<Home> {
     });
   }
 
+  ScreenIndex login() {
+    setState(() {
+      selectedPage = ScreenIndex.curriculum;
+    });
+    return selectedPage;
+  }
+
   void getCurrentUser() {
     try {
       final user = _auth.currentUser;
@@ -41,10 +48,17 @@ class _HomeState extends State<Home> {
     }
   }
 
+  ScreenIndex notLogin() {
+    setState(() {
+      selectedPage = ScreenIndex.account;
+    });
+    return selectedPage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (selectedPage != ScreenIndex.account)
+      appBar: (selectedPage == ScreenIndex.account)
           ? null
           : AppBar(
               backgroundColor: Colors.lightBlue,
@@ -165,7 +179,7 @@ class _HomeState extends State<Home> {
       ),
       body: user != null
           ? screenController.getPage(selectedPage)
-          : screenController.getPage(selectedPage = ScreenIndex.account),
+          : screenController.getPage(notLogin()),
     );
   }
 }
