@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   User? user;
   ScreenController screenController = ScreenController();
-  ScreenIndex selectedPage = ScreenIndex curriculum; // default
+  ScreenIndex selectedPage = ScreenIndex.curriculum; // default
   final _auth = FirebaseAuth.instance;
   @override
   void initState() {
