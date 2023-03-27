@@ -5,6 +5,8 @@ import 'package:assistant/components/menu_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:assistant/screens/account/account_screen.dart';
 import 'package:assistant/constant.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:assistant/models/account/account.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -14,20 +16,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  User? user;
+  User? _user;
   ScreenController screenController = ScreenController();
   ScreenIndex selectedPage = ScreenIndex.curriculum; // default
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+  Account account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
+
   @override
   void initState() {
     super.initState();
     getCurrentUser();
     onRefresh(FirebaseAuth.instance.currentUser);
+    getAccountDetail();
   }
 
   onRefresh(currUser) {
     setState(() {
-      user = currUser;
+      _user = currUser;
     });
   }
 
@@ -38,10 +44,30 @@ class _HomeState extends State<Home> {
     return selectedPage;
   }
 
+  Future getAccountDetail() async {
+    getCurrentUser();
+    int count = 0;
+    final users = await _firestore.collection('user').get();
+    for (var user in users.docs) {
+      if (user.get('email') == _user?.email) {
+        account = Account(
+            userName: user.get('userName'),
+            email: user.get('email'),
+            ID: user.get('ID'));
+        count++;
+      }
+    }
+    if(count == 0) {
+      account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
+    }
+  }
+
   void getCurrentUser() {
     try {
       final user = _auth.currentUser;
-      if (user != null) {}
+      if (user != null) {
+        _user = user;
+      }
     } catch (e) {
       print(e);
     }
@@ -95,7 +121,9 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const DrawHeader(),
+              DrawHeader(
+                account: account,
+              ),
               Column(
                 children: [
                   MenuItem(
@@ -176,7 +204,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: user != null
+      body: _user != null
           ? screenController.getPage(selectedPage)
           : screenController.getPage(notLogin()),
     );
