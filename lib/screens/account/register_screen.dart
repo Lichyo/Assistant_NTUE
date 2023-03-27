@@ -129,12 +129,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
                 ),
                 onPressed: () async {
-                  await _firestore.collection('user').add({
-                    'userName': name,
-                    'email': email,
-                    'password': password,
-                    'ID': ID,
-                  });
                   setState(() {
                     showSpinner = true;
                   });
@@ -142,6 +136,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
                     if (newUser != null) {
+                      await _firestore.collection('user').add({
+                        'userName': name,
+                        'email': email,
+                        'password': password,
+                        'ID': ID,
+                      });
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const Home()));
                     }
