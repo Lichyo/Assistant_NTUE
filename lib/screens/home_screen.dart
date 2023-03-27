@@ -18,17 +18,17 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   User? _user;
   ScreenController screenController = ScreenController();
-  ScreenIndex selectedPage = ScreenIndex.curriculum; // default
+  ScreenIndex selectedPage = ScreenIndex.account; // default
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  Account account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
+  Account account =
+      Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
 
   @override
   void initState() {
     super.initState();
     getCurrentUser();
     onRefresh(FirebaseAuth.instance.currentUser);
-    getAccountDetail();
   }
 
   onRefresh(currUser) {
@@ -45,7 +45,6 @@ class _HomeState extends State<Home> {
   }
 
   Future getAccountDetail() async {
-    getCurrentUser();
     int count = 0;
     final users = await _firestore.collection('user').get();
     for (var user in users.docs) {
@@ -55,11 +54,12 @@ class _HomeState extends State<Home> {
               userName: user.get('userName'),
               email: user.get('email'),
               ID: user.get('ID'));
+          login();
         });
         count++;
       }
     }
-    if(count == 0) {
+    if (count == 0) {
       account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
     }
   }
@@ -69,6 +69,7 @@ class _HomeState extends State<Home> {
       final user = _auth.currentUser;
       if (user != null) {
         _user = user;
+        getAccountDetail();
       }
     } catch (e) {
       print(e);
@@ -85,9 +86,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (selectedPage == ScreenIndex.account)
-          ? null
-          : AppBar(
+      appBar: (selectedPage != ScreenIndex.account)
+          ? AppBar(
               backgroundColor: Colors.lightBlue,
               actions: [
                 Visibility(
@@ -116,7 +116,8 @@ class _HomeState extends State<Home> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-            ),
+            )
+          : null,
       drawer: Drawer(
         child: SingleChildScrollView(
           child: Column(
