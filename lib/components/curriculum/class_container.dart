@@ -15,16 +15,16 @@ class ClassContainer extends StatelessWidget {
       onPressed: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ChatScreen(
-                  className: curriculum.className,
+                  className: curriculum.subject,
                 )));
       },
       child: ListTile(
         title: Text(
-          curriculum.className,
+          curriculum.subject,
           style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 30.0),
         ),
         subtitle: Text(
-          curriculum.time,
+          curriculum.time.toString(),
           style: TextStyle(color: Colors.grey.shade800),
         ),
         isThreeLine: true,

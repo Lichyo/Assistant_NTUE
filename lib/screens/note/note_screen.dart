@@ -1,5 +1,4 @@
 import 'package:assistant/screens/note/add_note_screen.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 import 'package:assistant/db/NoteDB.dart';

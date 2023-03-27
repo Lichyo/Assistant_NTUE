@@ -7,22 +7,28 @@ class BasicCurriculumScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          children: [
-            Column(
-              children: [
-                WeekContainer(week: Week.mon),
-                WeekContainer(week: Week.tues),
-                WeekContainer(week: Week.wed),
-                WeekContainer(week: Week.thur),
-                WeekContainer(week: Week.fri),
-              ],
-            ),
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        children: [
+          Column(
+            children: [
+              WeekContainer(week: Week.mon),
+              WeekContainer(week: Week.tues),
+              WeekContainer(week: Week.wed),
+              WeekContainer(week: Week.thur),
+              WeekContainer(week: Week.fri),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
