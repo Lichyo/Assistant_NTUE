@@ -50,10 +50,12 @@ class _HomeState extends State<Home> {
     final users = await _firestore.collection('user').get();
     for (var user in users.docs) {
       if (user.get('email') == _user?.email) {
-        account = Account(
-            userName: user.get('userName'),
-            email: user.get('email'),
-            ID: user.get('ID'));
+        setState(() {
+          account = Account(
+              userName: user.get('userName'),
+              email: user.get('email'),
+              ID: user.get('ID'));
+        });
         count++;
       }
     }
