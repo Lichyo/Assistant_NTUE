@@ -1,5 +1,4 @@
 import 'package:assistant/screen_controller.dart';
-import 'package:assistant/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item.dart';
