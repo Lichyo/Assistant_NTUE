@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/constant.dart';
 
 class ClassDatabase {
   static final ClassDatabase instance = ClassDatabase._init();
@@ -36,6 +37,16 @@ class ClassDatabase {
     final db = await instance.database;
     final id = await db.insert(classTable, _class.toJson());
     return _class.copy(id: id);
+  }
+
+  List<Curriculum> getWeekData({required List<Curriculum> curriculums, required Week week}) {
+    List<Curriculum> newCurriculum = [];
+    for(int index = 0; index < curriculums.length; index++) {
+      if(curriculums[index].week == week) {
+        newCurriculum.add(curriculums[index]);
+      }
+    }
+    return newCurriculum;
   }
 
   Future<Curriculum> readCurriculum(int id) async {

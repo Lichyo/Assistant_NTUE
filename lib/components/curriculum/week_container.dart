@@ -3,6 +3,7 @@ import 'package:assistant/components/curriculum/class_container.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/db/curriculum_database.dart';
 
 String getWeek(Week week) {
   if (week == Week.mon) {
@@ -20,12 +21,13 @@ String getWeek(Week week) {
 
 List<ClassContainer> getWeekData(Week week) {
   List<ClassContainer> classContainers = [];
-  ClassData classData = ClassData();
-  List<Curriculum> curriculum =
-      classData.getWeekData(curriculums: classData.curriculumData, week: week);
-  for (int index = 0; index < curriculum.length; index++) {
+  ClassDatabase db = ClassDatabase.instance;
+  List<Curriculum> curriculums = db.readAllCurriculum() as List<Curriculum>;
+  List<Curriculum> curriculumOfTheWeek =
+      db.getWeekData(curriculums: curriculums, week: week);
+  for (int index = 0; index < curriculumOfTheWeek.length; index++) {
     ClassContainer classContainer = ClassContainer(
-      curriculum: curriculum[index],
+      curriculum: curriculumOfTheWeek[index],
     );
     classContainers.add(classContainer);
   }
@@ -39,8 +41,6 @@ class WeekContainer extends StatelessWidget {
     required this.week,
   });
   Week week;
-  ClassData classData = ClassData();
-  List<ClassContainer> classContainers = [];
 
   @override
   Widget build(BuildContext context) {
