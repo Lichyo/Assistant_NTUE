@@ -19,17 +19,12 @@ String getWeek(Week week) {
   }
 }
 
-List<ClassContainer> getWeekData(Week week) {
+List<ClassContainer> getWeekData(Week week, List<Curriculum> curriculums) {
   List<ClassContainer> classContainers = [];
-  ClassDatabase db = ClassDatabase.instance;
-  List<Curriculum> curriculums = db.readAllCurriculum() as List<Curriculum>;
-  List<Curriculum> curriculumOfTheWeek =
-      db.getWeekData(curriculums: curriculums, week: week);
-  for (int index = 0; index < curriculumOfTheWeek.length; index++) {
-    ClassContainer classContainer = ClassContainer(
-      curriculum: curriculumOfTheWeek[index],
-    );
-    classContainers.add(classContainer);
+  for (int index = 0; index < curriculums.length; index++) {
+    if (curriculums[index].week == week) {
+      classContainers.add(ClassContainer(curriculum: curriculums[index]));
+    }
   }
   return classContainers;
 }
@@ -39,8 +34,10 @@ class WeekContainer extends StatelessWidget {
   WeekContainer({
     super.key,
     required this.week,
+    required this.curriculums,
   });
   Week week;
+  List<Curriculum> curriculums;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +55,7 @@ class WeekContainer extends StatelessWidget {
             height: 5.0,
           ),
           Column(
-            children: getWeekData(week),
+            children: getWeekData(week, curriculums),
           ),
         ],
       ),
