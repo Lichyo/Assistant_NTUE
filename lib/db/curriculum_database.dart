@@ -38,7 +38,7 @@ class ClassDatabase {
     return _class.copy(id: id);
   }
 
-  Future<Curriculum> readNote(int id) async {
+  Future<Curriculum> readCurriculum(int id) async {
     final db = await instance.database;
     final maps = await db.query(
       classTable,
@@ -53,7 +53,7 @@ class ClassDatabase {
     }
   }
 
-  Future<List<Curriculum>> readAllNotes() async {
+  Future<List<Curriculum>> readAllCurriculum() async {
     final db = await instance.database;
     const orderBy = '${ClassField.time} ASC';
     final result = await db.query(classTable, orderBy: orderBy);
