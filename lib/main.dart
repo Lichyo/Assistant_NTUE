@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'screens/chat/chat_screen.dart';
+import 'testing.dart';
+
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,5 +26,6 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Home(),
     );
+
   }
 }
