@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'screens/chat/chat_screen.dart';
 import 'testing.dart';
+import 'screens/pray_page.dart';
 
 
 Future main() async {
@@ -24,7 +25,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      home: PrayPage(),
     );
 
   }
