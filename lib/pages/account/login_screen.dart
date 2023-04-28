@@ -1,27 +1,22 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
-import 'package:assistant/screens/home_screen.dart';
+import 'package:assistant/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  final _firestore = FirebaseFirestore.instance;
+class _LoginScreenState extends State<LoginScreen> {
   final _auth = FirebaseAuth.instance;
-  String ID = "";
-  String password = "";
-  String name = "";
   String email = "";
+  String password = "";
   bool isObscure = true;
   bool showSpinner = false;
 
@@ -47,7 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   width: 20.0,
                 ),
                 Text(
-                  'Register',
+                  'Login',
                   style: kTitleTextStyle,
                 ),
               ],
@@ -56,49 +51,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
               height: 30.0,
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-              child: TextField(
-                onChanged: (value) {
-                  name = value;
-                },
-                keyboardType: TextInputType.name,
-                decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your name'),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30.0,
+                vertical: 5.0,
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
-                onChanged: (value) {
-                  ID = value;
-                },
-                keyboardType: TextInputType.number,
+                keyboardType: TextInputType.emailAddress,
                 decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
-              child: TextField(
+                    kTextFieldDecoration.copyWith(labelText: 'Enter your email'),
                 onChanged: (value) {
                   email = value;
                 },
-                keyboardType: TextInputType.emailAddress,
-                decoration: kTextFieldDecoration.copyWith(
-                    labelText: 'Enter your email'),
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 5.0,
+                horizontal: 30.0,
+              ),
               child: TextField(
-                onChanged: (value) {
-                  password = value;
-                },
-                keyboardType: TextInputType.text,
                 obscureText: isObscure,
                 decoration: kTextFieldDecoration.copyWith(
                   labelText: 'Enter your password',
@@ -108,11 +79,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         isObscure = !isObscure;
                       });
                     },
-                    child: const Icon(
-                      Icons.remove_red_eye_outlined,
-                    ),
+                    child: const Icon(Icons.remove_red_eye_outlined),
                   ),
                 ),
+                onChanged: (value) {
+                  password = value;
+                },
               ),
             ),
             Padding(
@@ -132,26 +104,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   setState(() {
                     showSpinner = true;
                   });
+                  FocusManager.instance.primaryFocus?.unfocus();
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
+                    final user = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
-                    if (newUser != null) {
-                      await _firestore.collection('user').add({
-                        'userName': name,
-                        'email': email,
-                        'password': password,
-                        'ID': ID,
+                    if(user != null) {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Home()));
+                      setState(() {
+                        showSpinner = false;
                       });
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Home()));
+                      print('log in');
                     }
-                    setState(() {
-                      showSpinner = false;
-                    });
                   } catch (e) {
-                    Alert(context: context, title: "註冊失敗", desc: e.toString())
-                        .show();
                     setState(() {
+                      Alert(context: context, title: "註冊失敗", desc: e.toString()).show();
                       showSpinner = false;
                     });
                   }

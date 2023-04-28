@@ -1,4 +1,4 @@
-import 'package:assistant/screens/curriculum/add_subject_page.dart';
+import 'package:assistant/pages/curriculum/add_subject_page.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/curriculum/week_container.dart';
 import 'package:assistant/constant.dart';

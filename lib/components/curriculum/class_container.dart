@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
-import 'package:assistant/screens/chat/chat_screen.dart';
+import 'package:assistant/pages/chat/chat_screen.dart';
 
 class ClassContainer extends StatelessWidget {
   const ClassContainer({

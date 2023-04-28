@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class PrayPage extends StatefulWidget {
   const PrayPage({Key? key}) : super(key: key);
@@ -7,11 +8,17 @@ class PrayPage extends StatefulWidget {
 }
 
 class _PrayPageState extends State<PrayPage> {
+  int count = 0;
+  @override
+  void initState() {
+    super.initState();
+    count = 0;
+  }
   Image prayImage = const Image(
     image: AssetImage('lib/images/praying_picture.png'),
   );
 
-  void knock() async {
+  void knockAndCounting() async {
     setState(() {
       prayImage = const Image(
         image: AssetImage('lib/images/knock.png'),
@@ -24,6 +31,7 @@ class _PrayPageState extends State<PrayPage> {
         );
       });
     });
+    count++;
   }
 
   @override
@@ -41,9 +49,18 @@ class _PrayPageState extends State<PrayPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
+            flex: 3,
             child: GestureDetector(
-              onTap: knock,
+              onTap: knockAndCounting,
               child: prayImage,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              '本次祈禱次數：$count',
+              style: const TextStyle(
+                fontSize: 20.0,
+              ),
             ),
           ),
         ],
@@ -51,5 +68,3 @@ class _PrayPageState extends State<PrayPage> {
     );
   }
 }
-
-

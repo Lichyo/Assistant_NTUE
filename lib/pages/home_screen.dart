@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:assistant/screens/account/account_screen.dart';
+import 'package:assistant/pages/account/account_screen.dart';
 import 'package:assistant/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/models/account/account.dart';
+import 'package:assistant/pages/pray_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -88,12 +89,15 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: (selectedPage != ScreenIndex.account)
           ? AppBar(
-              backgroundColor: Colors.lightBlue,
+              // backgroundColor: Colors.lightBlue,
               actions: [
                 Visibility(
                   visible:
                       selectedPage == ScreenIndex.curriculum ? true : false,
                   child: GestureDetector(
+                    onLongPress: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrayPage()));
+                    },
                     onTap: () {
                       setState(() {
                         selectedPage = ScreenIndex.calendar;

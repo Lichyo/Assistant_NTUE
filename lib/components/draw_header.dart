@@ -12,7 +12,7 @@ class DrawHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.lightBlue,
+      color: Colors.blue,
       width: double.infinity,
       height: 250,
       padding: const EdgeInsets.only(top: 50.0),

@@ -1,11 +1,11 @@
-import 'package:assistant/screens/curriculum/basic_curriculum_screen.dart';
-import 'package:assistant/screens/note/note_screen.dart';
-import 'package:assistant/screens/account/account_screen.dart';
+import 'package:assistant/pages/curriculum/basic_curriculum_screen.dart';
+import 'package:assistant/pages/note/note_screen.dart';
+import 'package:assistant/pages/account/account_screen.dart';
 import 'package:flutter/material.dart';
-import 'screens/setting/setting_screen.dart';
-import 'screens/notification/notification_screen.dart';
-import 'screens/issue_report_screen/issue_report_screen.dart';
-import 'screens/curriculum/calendar_curriculum_screen.dart';
+import 'pages/setting/setting_screen.dart';
+import 'pages/notification/notification_screen.dart';
+import 'pages/issue_report_screen/issue_report_screen.dart';
+import 'pages/curriculum/calendar_curriculum_screen.dart';
 import 'constant.dart';
 
 class ScreenController {
