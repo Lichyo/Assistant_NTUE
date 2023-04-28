@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 
 class PrayPage extends StatefulWidget {
   const PrayPage({Key? key}) : super(key: key);
@@ -9,11 +10,19 @@ class PrayPage extends StatefulWidget {
 
 class _PrayPageState extends State<PrayPage> {
   int count = 0;
+  final AudioPlayer audioPlayer = AudioPlayer();
+
+  Future<void> setupAudioPlayer() async{
+    final duration = await audioPlayer.setUrl(
+        'https://youtu.be/Df_pGKwDJDU');
+  }
+
   @override
   void initState() {
     super.initState();
     count = 0;
   }
+
   Image prayImage = const Image(
     image: AssetImage('lib/images/praying_picture.png'),
   );
@@ -38,11 +47,9 @@ class _PrayPageState extends State<PrayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          '木魚敲敲祈禱區',
-          style: TextStyle(
-            fontSize: 25.0,
-          ),
+        title: Text(
+          'Temple',
+          style: GoogleFonts.getFont('Delius', fontSize: 30.0),
         ),
       ),
       body: Column(
@@ -57,10 +64,8 @@ class _PrayPageState extends State<PrayPage> {
           ),
           Expanded(
             child: Text(
-              '本次祈禱次數：$count',
-              style: const TextStyle(
-                fontSize: 20.0,
-              ),
+              'Praying Count：$count',
+              style: GoogleFonts.getFont('Pacifico', fontSize: 35.0),
             ),
           ),
         ],

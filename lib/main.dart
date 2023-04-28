@@ -6,7 +6,6 @@ import 'pages/chat/chat_screen.dart';
 import 'testing.dart';
 import 'pages/pray_page.dart';
 
-
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,6 +26,5 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Home(),
     );
-
   }
 }
