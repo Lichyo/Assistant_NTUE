@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'models/NotificationApi.dart';
+import 'dart:convert';
+import 'dart:io';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key}) : super(key: key);
@@ -17,9 +18,12 @@ class _TestPageState extends State<TestPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextButton(
-            onPressed: () => NotificationApi.showNotification(
-
-            ),
+            onPressed: () async {
+               var file = File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
+                 var map = json.decode(contents);
+                 print(map['111016041'][0]['lesson']);
+               });
+            },
             child: const Text('Testing Button'),
           ),
         ],

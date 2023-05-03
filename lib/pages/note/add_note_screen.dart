@@ -31,7 +31,6 @@ class _AddNoteState extends State<AddNote> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.lightBlue,
         title: const Text(
           'Add Note',
           style: TextStyle(
@@ -192,7 +191,7 @@ class _AddNoteState extends State<AddNote> {
                 const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
             child: RoundedButton(
               title: 'Submit',
-              color: Colors.lightBlue,
+              color: Colors.blue,
               onPressed: () async {
                 final db = NoteDB.instance;
                 db.create(Note(

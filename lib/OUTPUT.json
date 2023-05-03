@@ -1,0 +1,12 @@
+{
+  "111016041" : [{"lesson": "演算法", "teacher": "王鄭慈", "lessonTime": "四(02,03,04)", "lessonClass": "Y505"},
+    {"lesson": "計算機組織", "teacher": "許佳興", "lessonTime": "三(05,06,07)", "lessonClass": "Y404"},
+    {"lesson": "網路程式設計", "teacher": "游象甫", "lessonTime": "四(05,06,07)", "lessonClass": "F305"},
+    {"lesson": "計算機組織及微算機實驗", "teacher": "王人正", "lessonTime": "五(03,04)", "lessonClass": "C614"},
+    {"lesson": "應用電子學(二)", "teacher": "劉遠楨", "lessonTime": "一(0N,05,06)", "lessonClass": "C633"},
+    {"lesson": "應用電子學實驗", "teacher": "王人正", "lessonTime": "二(05,06)", "lessonClass": "C614"},
+    {"lesson": "機率", "teacher": "王富祥", "lessonTime": "三(02,03,04)", "lessonClass": "C622"},
+    {"lesson": "人工智慧導論", "teacher": "羅光志", "lessonTime": "五(0N,05,06)", "lessonClass": "F401A"},
+    {"lesson": "體育(四)", "teacher": "鄭慧茹", "lessonTime": "二(03,04)", "lessonClass": "K1"}
+  ]
+}
