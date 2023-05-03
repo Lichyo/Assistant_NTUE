@@ -21,7 +21,7 @@ class _TestPageState extends State<TestPage> {
             onPressed: () async {
                var file = File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
                  var map = json.decode(contents);
-                 print(map['111016041'][0]['lesson']);
+                 print(map['111016026'][1]['lesson']);
                });
             },
             child: const Text('Testing Button'),

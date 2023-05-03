@@ -8,7 +8,7 @@ class Curriculum {
   String? teacher;
   String? location;
   Week week;
-  DateTime time;
+  String time;
 
   Curriculum(
       {required this.subject,
@@ -22,8 +22,7 @@ class Curriculum {
         subject: json[ClassField.subject] as String,
         teacher: json[ClassField.teacher] as String,
         week: json[ClassField.week] as Week,
-        time: DateTime.parse(
-            json[ClassField.time] as String), // special object iso
+        time: json[ClassField.time] as String,
       );
 
   Map<String, Object?> toJson() => {
@@ -32,13 +31,13 @@ class Curriculum {
         ClassField.teacher: teacher,
         ClassField.location: location,
         ClassField.week: week,
-        ClassField.time: time.toIso8601String(),
+        ClassField.time: time,
       };
 
   Curriculum copy({
     int? id,
     String? teacher,
-    DateTime? time,
+    String? time,
     String? location,
     String? subject,
     Week? week,
