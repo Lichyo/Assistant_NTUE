@@ -4,6 +4,9 @@ import 'package:assistant/components/curriculum/week_container.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/db/curriculum_database.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/models/curriculum/class_data.dart';
+import 'dart:io';
+import 'dart:convert';
 
 class BasicCurriculumScreen extends StatefulWidget {
   const BasicCurriculumScreen({Key? key}) : super(key: key);
@@ -18,7 +21,15 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
 
   @override
   void initState() {
-    refreshCurriculum();
+    // refreshCurriculum();
+    // File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
+    //   var map = json.decode(contents);
+    //   classData = ClassData(file: map, id: '111016041');
+    //   curriculums = ClassData.curriculumData;
+    // });
+    curriculums = ClassData.curriculumData;
+    print('in basic ');
+    print(curriculums);
     super.initState();
   }
 
@@ -40,13 +51,13 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
       child: isLoad
           ? const CircularProgressIndicator()
           : Scaffold(
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const AddSubjectPage()));
-                },
-                child: const Icon(Icons.add),
-              ),
+              // floatingActionButton: FloatingActionButton(
+              //   onPressed: () {
+              //     Navigator.of(context).push(MaterialPageRoute(
+              //         builder: (context) => const AddSubjectPage()));
+              //   },
+              //   child: const Icon(Icons.add),
+              // ),
               body: ListView(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,

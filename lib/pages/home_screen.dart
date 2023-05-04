@@ -1,3 +1,4 @@
+import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:assistant/screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
@@ -8,6 +9,9 @@ import 'package:assistant/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/models/account/account.dart';
 import 'package:assistant/pages/pray_page.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'package:assistant/models/curriculum/class_data.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,6 +32,11 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
+      var map = json.decode(contents);
+      ClassData classData = ClassData(file: map, id: '111016041');
+      List<Curriculum> curriculums = ClassData.curriculumData;
+    });
     getCurrentUser();
     onRefresh(FirebaseAuth.instance.currentUser);
   }

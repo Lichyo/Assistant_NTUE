@@ -4,9 +4,8 @@ import 'curriculum.dart';
 class ClassData {
 
   ClassData({file, id}) {
-    initCurriculumData(file: file, id: id);
+    curriculumData = initCurriculumData(file: file, id: id);
   }
-
   static List<Curriculum> curriculumData = [];
 
   List<Curriculum> getWeekData(
