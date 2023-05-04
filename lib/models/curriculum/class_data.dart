@@ -2,33 +2,73 @@ import 'package:assistant/constant.dart';
 import 'curriculum.dart';
 
 class ClassData {
-  List<Curriculum> curriculumData = [
-    // Curriculum(subject: '應用電子學', week: Week.mon, time: '12:10 ~ 15:20'),
-    // Curriculum(subject: '體育', week: Week.tues, time: '10:10 ~ 12: 00'),
-    // Curriculum(subject: '應用電子學實驗', week: Week.tues, time: '13:30 ~ 15:20'),
-    // Curriculum(subject: '機率', week: Week.wed, time: '9:10 ~ 12:00'),
-    // Curriculum(subject: '計算機組織', week: Week.wed, time: '13:30 ~ 16:20'),
-    // Curriculum(subject: '演算法', time: '9:10 ~ 12:00', week: Week.thur),
-    // Curriculum(subject: '網路程式設計', time: '13:30 ~ 16:20', week: Week.thur),
-    // Curriculum(subject: '計算機實驗', time: '10:10 ~ 12:00', week: Week.fri),
-    // Curriculum(subject: '人工智慧導論', time: '12:10 ~ 15:10', week: Week.fri),
-  ];
 
-  List<Curriculum> getWeekData({required List<Curriculum> curriculums, required Week week}) {
+  ClassData({file, id}) {
+    initCurriculumData(file: file, id: id);
+  }
+
+  static List<Curriculum> curriculumData = [];
+
+  List<Curriculum> getWeekData(
+      {required List<Curriculum> curriculums, required Week week}) {
     List<Curriculum> newCurriculum = [];
-    for(int index = 0; index < curriculums.length; index++) {
-      if(curriculums[index].week == week) {
+    for (int index = 0; index < curriculums.length; index++) {
+      if (curriculums[index].week == week) {
         newCurriculum.add(curriculums[index]);
       }
     }
     return newCurriculum;
   }
 
-  List<String> getClassName(){
+  List<String> getClassName() {
     List<String> className = [];
-    for(int index = 0; index < curriculumData.length; index++) {
+    for (int index = 0; index < curriculumData.length; index++) {
       className.add(curriculumData[index].subject);
     }
     return className;
+  }
+
+  List<Curriculum> initCurriculumData({required Map file, required String id}) {
+    var data = file[id];
+    List<Curriculum> curriculums = [];
+    for (int i = 0; i < file[id].length; i++) {
+      if (data[i]['lessonTime'][0] == '一') {
+        curriculums.add(Curriculum(
+            subject: data[i]['lesson'],
+            time: data[i]['lessonTime'],
+            week: Week.mon,
+            teacher: data[i]['teacher'],
+            location: data[i]['lessonClass']));
+      } else if (data[i]['lessonTime'][0] == '二') {
+        curriculums.add(Curriculum(
+            subject: data[i]['lesson'],
+            time: data[i]['lessonTime'],
+            week: Week.tues,
+            teacher: data[i]['teacher'],
+            location: data[i]['lessonClass']));
+      } else if (data[i]['lessonTime'][0] == '三') {
+        curriculums.add(Curriculum(
+            subject: data[i]['lesson'],
+            time: data[i]['lessonTime'],
+            week: Week.wed,
+            teacher: data[i]['teacher'],
+            location: data[i]['lessonClass']));
+      } else if (data[i]['lessonTime'][0] == '四') {
+        curriculums.add(Curriculum(
+            subject: data[i]['lesson'],
+            time: data[i]['lessonTime'],
+            week: Week.thur,
+            teacher: data[i]['teacher'],
+            location: data[i]['lessonClass']));
+      } else if (data[i]['lessonTime'][0] == '五') {
+        curriculums.add(Curriculum(
+            subject: data[i]['lesson'],
+            time: data[i]['lessonTime'],
+            week: Week.fri,
+            teacher: data[i]['teacher'],
+            location: data[i]['lessonClass']));
+      }
+    }
+    return curriculums;
   }
 }
