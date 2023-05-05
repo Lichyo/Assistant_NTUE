@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:assistant/components/rounded_button.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -36,19 +37,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Image(
+              children: [
+                const Image(
                   image: AssetImage(
                     'lib/images/NTUE.png',
                   ),
                   height: 90.0,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20.0,
                 ),
                 Text(
                   'Register',
-                  style: kTitleTextStyle,
+                  style: kTitleTextStyle.copyWith(color: Colors.blue),
                 ),
               ],
             ),
@@ -57,31 +58,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   name = value;
                 },
                 keyboardType: TextInputType.name,
                 decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your name'),
+                kTextFieldDecoration.copyWith(labelText: 'Enter your name'),
               ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   ID = value;
                 },
                 keyboardType: TextInputType.number,
                 decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
+                kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
               ),
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   email = value;
@@ -93,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   password = value;
@@ -117,49 +118,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
-              child: ElevatedButton(
-                style: const ButtonStyle(
-                  padding: MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 10.0,
-                    ),
-                  ),
-                  backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
-                ),
+              const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+              child: RoundedButton(
+                color: Colors.blue.shade600,
+                title: 'Sign up',
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
                   });
+                  FocusManager.instance.primaryFocus?.unfocus();
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
+                    final user = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
-                    if (newUser != null) {
-                      await _firestore.collection('user').add({
-                        'userName': name,
-                        'email': email,
-                        'password': password,
-                        'ID': ID,
-                      });
+                    if (user != null) {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const Home()));
+                      setState(() {
+                        showSpinner = false;
+                      });
+                      print('register');
                     }
-                    setState(() {
-                      showSpinner = false;
-                    });
                   } catch (e) {
-                    Alert(context: context, title: "註冊失敗", desc: e.toString())
-                        .show();
                     setState(() {
+                      Alert(context: context, title: "註冊失敗", desc: e.toString())
+                          .show();
                       showSpinner = false;
                     });
                   }
                 },
-                child: const Text(
-                  'Submit',
-                  style: kButtonTextStyle,
-                ),
               ),
             ),
           ],

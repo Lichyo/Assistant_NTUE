@@ -5,6 +5,7 @@ import 'package:assistant/pages/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:assistant/components/rounded_button.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -57,8 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: TextField(
                 keyboardType: TextInputType.emailAddress,
-                decoration:
-                    kTextFieldDecoration.copyWith(labelText: 'Enter your email'),
+                decoration: kTextFieldDecoration.copyWith(
+                    labelText: 'Enter your email'),
                 onChanged: (value) {
                   email = value;
                 },
@@ -89,17 +90,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
-              child: ElevatedButton(
-                style: const ButtonStyle(
-                  padding: MaterialStatePropertyAll(
-                    EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 10.0,
-                    ),
-                  ),
-                  backgroundColor: MaterialStatePropertyAll(Colors.lightBlue),
-                ),
+              const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+              child: RoundedButton(
+                color: Colors.lightBlue.shade400,
+                title: 'Sign in',
                 onPressed: () async {
                   setState(() {
                     showSpinner = true;
@@ -108,8 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   try {
                     final user = await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
-                    if(user != null) {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Home()));
+                    if (user != null) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Home()));
                       setState(() {
                         showSpinner = false;
                       });
@@ -117,15 +112,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     }
                   } catch (e) {
                     setState(() {
-                      Alert(context: context, title: "註冊失敗", desc: e.toString()).show();
+                      Alert(context: context, title: "登入失敗", desc: e.toString())
+                          .show();
                       showSpinner = false;
                     });
                   }
                 },
-                child: const Text(
-                  'Submit',
-                  style: kButtonTextStyle,
-                ),
               ),
             ),
           ],

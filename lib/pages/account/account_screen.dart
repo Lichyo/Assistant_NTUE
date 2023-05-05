@@ -40,7 +40,7 @@ class AccountScreen extends StatelessWidget {
                 horizontal: 30.0,
               ),
               child: RoundedButton(
-                color: Colors.lightBlue,
+                color: Colors.lightBlue.shade400,
                 title: 'Login',
                 onPressed: () {
                   Navigator.of(context).push(
@@ -53,7 +53,7 @@ class AccountScreen extends StatelessWidget {
                 horizontal: 30.0,
               ),
               child: RoundedButton(
-                color: Colors.lightBlue,
+                color: Colors.blue.shade600,
                 title: 'Register',
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(

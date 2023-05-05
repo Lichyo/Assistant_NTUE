@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
+    File('/Users/lichyo/StudioProjects/assistant/lib/assets/OUTPUT.json').readAsString().then((String contents) {
       var map = json.decode(contents);
       ClassData classData = ClassData(file: map, id: '111016041');
       List<Curriculum> curriculums = ClassData.curriculumData;
