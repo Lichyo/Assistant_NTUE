@@ -10,8 +10,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/models/account/account.dart';
 import 'package:assistant/pages/pray_page.dart';
 import 'dart:convert';
-import 'dart:io';
+import 'package:http/http.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -32,11 +33,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    File('/Users/lichyo/StudioProjects/assistant/lib/assets/OUTPUT.json').readAsString().then((String contents) {
-      var map = json.decode(contents);
-      ClassData classData = ClassData(file: map, id: '111016041');
-      List<Curriculum> curriculums = ClassData.curriculumData;
-    });
     getCurrentUser();
     onRefresh(FirebaseAuth.instance.currentUser);
   }
@@ -100,12 +96,14 @@ class _HomeState extends State<Home> {
           ? AppBar(
               // backgroundColor: Colors.lightBlue,
               actions: [
+                // TextButton(onPressed: initClassData, child: const Text('aaa'),),
                 Visibility(
                   visible:
                       selectedPage == ScreenIndex.curriculum ? true : false,
                   child: GestureDetector(
-                    onLongPress: (){
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PrayPage()));
+                    onLongPress: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const PrayPage()));
                     },
                     onTap: () {
                       setState(() {

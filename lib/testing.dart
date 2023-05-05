@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'models/curriculum/class_data.dart';
+import 'package:http/http.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({Key? key}) : super(key: key);
@@ -20,10 +21,12 @@ class _TestPageState extends State<TestPage> {
         children: [
           TextButton(
             onPressed: () async {
-               File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
-                 var map = json.decode(contents);
-                 ClassData classData = ClassData(file: map, id: '111016041');
-               });
+              var data = await get(Uri.parse('https://raw.githubusercontent.com/Lichyo/Assistant_NTUE/main/lib/assets/OUTPUT.json?token=GHSAT0AAAAAAB36P22MW6DIUGZDKQYPUH4MZCUSGHA'));
+              var map = jsonDecode(data.body);
+              ClassData classData = ClassData(file: map, id: '111016041');
+              for(int i = 0; i < ClassData.curriculumData.length; i++) {
+                print(ClassData.curriculumData[i].subject);
+              }
             },
             child: const Text('Testing Button'),
           ),

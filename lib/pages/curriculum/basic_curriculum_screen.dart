@@ -6,6 +6,7 @@ import 'package:assistant/db/curriculum_database.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'dart:io';
+import 'package:http/http.dart';
 import 'dart:convert';
 
 class BasicCurriculumScreen extends StatefulWidget {
@@ -21,15 +22,7 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
 
   @override
   void initState() {
-    // refreshCurriculum();
-    // File('/Users/lichyo/StudioProjects/assistant/lib/OUTPUT.json').readAsString().then((String contents) {
-    //   var map = json.decode(contents);
-    //   classData = ClassData(file: map, id: '111016041');
-    //   curriculums = ClassData.curriculumData;
-    // });
-    curriculums = ClassData.curriculumData;
-    print('in basic ');
-    print(curriculums);
+    refreshCurriculum();
     super.initState();
   }
 
@@ -41,7 +34,14 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
 
   Future refreshCurriculum() async {
     setState(() => isLoad = true);
-    curriculums = await ClassDatabase.instance.readAllCurriculum();
+    // curriculums = await ClassDatabase.instance.readAllCurriculum();
+    var data = await get(Uri.parse('https://lichyo.github.io/Assistant_NTUE/'));
+    var map = jsonDecode(data.body);
+    ClassData classData = ClassData(file: map, id: '111016041');
+    curriculums = ClassData.curriculumData;
+    for (int i = 0; i < ClassData.curriculumData.length; i++) {
+      print(ClassData.curriculumData[i].subject);
+    }
     setState(() => isLoad = false);
   }
 
