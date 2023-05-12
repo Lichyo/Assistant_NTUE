@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/components/curriculum/class_container.dart';
-import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
-import 'package:assistant/db/curriculum_database.dart';
 
 String getWeek(Week week) {
   if (week == Week.mon) {
