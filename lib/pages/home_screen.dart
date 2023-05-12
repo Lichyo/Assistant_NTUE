@@ -9,10 +9,6 @@ import 'package:assistant/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/models/account/account.dart';
 import 'package:assistant/pages/pray_page.dart';
-import 'dart:convert';
-import 'package:http/http.dart';
-import 'package:assistant/models/curriculum/class_data.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

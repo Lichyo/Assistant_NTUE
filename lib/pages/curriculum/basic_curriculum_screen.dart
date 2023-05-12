@@ -1,11 +1,9 @@
-import 'package:assistant/pages/curriculum/add_subject_page.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/curriculum/week_container.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/db/curriculum_database.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
-import 'dart:io';
 import 'package:http/http.dart';
 import 'dart:convert';
 
@@ -34,10 +32,9 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
 
   Future refreshCurriculum() async {
     setState(() => isLoad = true);
-    // curriculums = await ClassDatabase.instance.readAllCurriculum();
-    var data = await get(Uri.parse('https://lichyo.github.io/Assistant_NTUE/'));
+    var data = await get(Uri.parse('http://127.0.0.1:5000/done?a=111016011&p=A131176227'));
     var map = jsonDecode(data.body);
-    ClassData classData = ClassData(file: map, id: '111016041');
+    ClassData classData = ClassData(file: map, id: '111016011');
     curriculums = ClassData.curriculumData;
     for (int i = 0; i < ClassData.curriculumData.length; i++) {
       print(ClassData.curriculumData[i].subject);
@@ -51,13 +48,6 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
       child: isLoad
           ? const CircularProgressIndicator()
           : Scaffold(
-              // floatingActionButton: FloatingActionButton(
-              //   onPressed: () {
-              //     Navigator.of(context).push(MaterialPageRoute(
-              //         builder: (context) => const AddSubjectPage()));
-              //   },
-              //   child: const Icon(Icons.add),
-              // ),
               body: ListView(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
