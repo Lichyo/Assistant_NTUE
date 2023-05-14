@@ -6,6 +6,7 @@ import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:assistant/models/account/account.dart';
 
 class BasicCurriculumScreen extends StatefulWidget {
   const BasicCurriculumScreen({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class BasicCurriculumScreen extends StatefulWidget {
 class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
   bool isLoad = false;
   List<Curriculum> curriculums = [];
+  final _account = Account.instance;
 
   @override
   void initState() {
@@ -32,12 +34,31 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
 
   Future refreshCurriculum() async {
     setState(() => isLoad = true);
-    var data = await get(Uri.parse('http://127.0.0.1:5000/done?a=111016011&p=A131176227'));
+    curriculums = await ClassDatabase.instance.readAllLesson();
+    if (curriculums.isEmpty) {
+      initCurriculum();
+    }
+    setState(() => isLoad = false);
+  }
+
+  Future initCurriculum() async {
+    setState(() => isLoad = true);
+    var data = await get(Uri.parse(
+        'http://127.0.0.1:5000/done?a=${_account?.ID}&p=${_account?.password}'));
     var map = jsonDecode(data.body);
-    ClassData classData = ClassData(file: map, id: '111016011');
+    ClassData classData = ClassData(file: map, id: _account?.ID);
     curriculums = ClassData.curriculumData;
     for (int i = 0; i < ClassData.curriculumData.length; i++) {
-      print(ClassData.curriculumData[i].subject);
+      var classData = ClassData.curriculumData[i];
+      var db = ClassDatabase.instance;
+      db.create(
+        Curriculum(
+            subject: classData.subject,
+            time: classData.time,
+            week: classData.week,
+            location: classData.location,
+            teacher: classData.teacher),
+      );
     }
     setState(() => isLoad = false);
   }

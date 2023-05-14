@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   Account account =
-      Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
+      Account(userName: 'Unknown', email: 'Unknown', ID: '000000000', password: '00000000');
 
   @override
   void initState() {
@@ -46,23 +46,24 @@ class _HomeState extends State<Home> {
     return selectedPage;
   }
 
-  Future getAccountDetail() async {
-    int count = 0;
+  Future getAccountDetailAndInitAccount() async {
+    bool isUser = false;
     final users = await _firestore.collection('user').get();
     for (var user in users.docs) {
       if (user.get('email') == _user?.email) {
         setState(() {
-          account = Account(
+          Account.instance = Account(
+              password: user.get('password'),
               userName: user.get('userName'),
               email: user.get('email'),
               ID: user.get('ID'));
           login();
         });
-        count++;
+        isUser = true;
       }
     }
-    if (count == 0) {
-      account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000');
+    if (isUser == false) {
+      account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000', password: '00000000');
     }
   }
 
@@ -71,7 +72,7 @@ class _HomeState extends State<Home> {
       final user = _auth.currentUser;
       if (user != null) {
         _user = user;
-        getAccountDetail();
+        getAccountDetailAndInitAccount();
       }
     } catch (e) {
       print(e);
@@ -90,9 +91,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: (selectedPage != ScreenIndex.account)
           ? AppBar(
-              // backgroundColor: Colors.lightBlue,
               actions: [
-                // TextButton(onPressed: initClassData, child: const Text('aaa'),),
                 Visibility(
                   visible:
                       selectedPage == ScreenIndex.curriculum ? true : false,

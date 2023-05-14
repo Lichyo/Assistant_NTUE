@@ -33,10 +33,10 @@ class ClassDatabase {
 ''');
   }
 
-  Future<Curriculum> create(Curriculum _class) async {
+  Future<Curriculum> create(Curriculum curriculum) async {
     final db = await instance.database;
-    final id = await db.insert(classTable, _class.toJson());
-    return _class.copy(id: id);
+    final id = await db.insert(classTable, curriculum.toJson());
+    return curriculum.copy(id: id);
   }
 
   List<Curriculum> getWeekData({required List<Curriculum> curriculums, required Week week}) {
@@ -64,7 +64,7 @@ class ClassDatabase {
     }
   }
 
-  Future<List<Curriculum>> readAllCurriculum() async {
+  Future<List<Curriculum>> readAllLesson() async {
     final db = await instance.database;
     const orderBy = '${ClassField.time} ASC';
     final result = await db.query(classTable, orderBy: orderBy);

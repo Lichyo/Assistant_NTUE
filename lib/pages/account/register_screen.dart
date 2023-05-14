@@ -58,31 +58,31 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   name = value;
                 },
                 keyboardType: TextInputType.name,
                 decoration:
-                kTextFieldDecoration.copyWith(labelText: 'Enter your name'),
+                    kTextFieldDecoration.copyWith(labelText: 'Enter your name'),
               ),
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   ID = value;
                 },
                 keyboardType: TextInputType.number,
                 decoration:
-                kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
+                    kTextFieldDecoration.copyWith(labelText: 'Enter your ID'),
               ),
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   email = value;
@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 30.0),
               child: TextField(
                 onChanged: (value) {
                   password = value;
@@ -118,7 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 15.0),
               child: RoundedButton(
                 color: Colors.blue.shade600,
                 title: 'Sign up',
@@ -128,20 +128,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   });
                   FocusManager.instance.primaryFocus?.unfocus();
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(
+                    final newUser = await _auth.createUserWithEmailAndPassword(
                         email: email, password: password);
-                    if (user != null) {
+                    if (newUser != null) {
+                      await _firestore.collection('user').add({
+                        'userName': name,
+                        'email': email,
+                        'password': password,
+                        'ID': ID,
+                      });
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const Home()));
-                      setState(() {
-                        showSpinner = false;
-                      });
-                      print('register');
                     }
-                  } catch (e) {
                     setState(() {
-                      Alert(context: context, title: "註冊失敗", desc: e.toString())
-                          .show();
+                      showSpinner = false;
+                    });
+                  } catch (e) {
+                    Alert(context: context, title: "註冊失敗", desc: e.toString())
+                        .show();
+                    setState(() {
                       showSpinner = false;
                     });
                   }
