@@ -39,7 +39,7 @@ class ClassDatabase {
     return curriculum.copy(id: id);
   }
 
-  List<Curriculum> getWeekData({required List<Curriculum> curriculums, required Week week}) {
+  List<Curriculum> getWeekData({required List<Curriculum> curriculums, required String week}) {
     List<Curriculum> newCurriculum = [];
     for(int index = 0; index < curriculums.length; index++) {
       if(curriculums[index].week == week) {

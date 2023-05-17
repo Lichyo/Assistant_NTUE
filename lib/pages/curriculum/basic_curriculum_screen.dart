@@ -77,11 +77,11 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
                 children: [
                   Column(
                     children: [
-                      WeekContainer(week: Week.mon, curriculums: curriculums),
-                      WeekContainer(week: Week.tues, curriculums: curriculums),
-                      WeekContainer(week: Week.wed, curriculums: curriculums),
-                      WeekContainer(week: Week.thur, curriculums: curriculums),
-                      WeekContainer(week: Week.fri, curriculums: curriculums),
+                      WeekContainer(week: 'Mon', curriculums: curriculums),
+                      WeekContainer(week: 'Tues', curriculums: curriculums),
+                      WeekContainer(week: 'Wed', curriculums: curriculums),
+                      WeekContainer(week: 'Thur', curriculums: curriculums),
+                      WeekContainer(week: 'Fri', curriculums: curriculums),
                     ],
                   ),
                 ],

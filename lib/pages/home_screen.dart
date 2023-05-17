@@ -130,9 +130,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              DrawHeader(
-                account: account,
-              ),
+              DrawHeader(),
               Column(
                 children: [
                   MenuItem(

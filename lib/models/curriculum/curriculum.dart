@@ -1,4 +1,5 @@
 import 'package:assistant/constant.dart';
+import 'package:assistant/db/curriculum_database.dart';
 
 const String classTable = 'class';
 
@@ -7,8 +8,22 @@ class Curriculum {
   String subject;
   String? teacher;
   String? location;
-  Week week;
+  String week;
   String time;
+
+  String getWeekInString({week}) {
+    if (week == Week.mon) {
+      return 'Mon';
+    } else if (week == Week.tues) {
+      return 'Tues';
+    } else if (week == Week.wed) {
+      return 'Wed';
+    } else if (week == Week.thur) {
+      return 'Thur';
+    } else {
+      return 'Fri';
+    }
+  }
 
   Curriculum(
       {required this.subject,
@@ -21,7 +36,7 @@ class Curriculum {
         id: json[ClassField.id] as int?,
         subject: json[ClassField.subject] as String,
         teacher: json[ClassField.teacher] as String,
-        week: json[ClassField.week] as Week,
+        week: json[ClassField.week] as String,
         time: json[ClassField.time] as String,
       );
 
@@ -40,7 +55,7 @@ class Curriculum {
     String? time,
     String? location,
     String? subject,
-    Week? week,
+    String? week,
   }) =>
       Curriculum(
         id: id ?? this.id,

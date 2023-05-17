@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:assistant/models/account/account.dart';
 
 class DrawHeader extends StatelessWidget {
-  const DrawHeader({
+  DrawHeader({
     super.key,
-    required this.account,
   });
 
-  final Account account;
+  final _account = Account.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -30,11 +29,11 @@ class DrawHeader extends StatelessWidget {
             ),
           ),
           Text(
-            account.userName,
+            _account!.userName,
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           Text(
-            account.email,
+            _account!.email,
             style: TextStyle(
               color: Colors.grey[200],
               fontSize: 14,

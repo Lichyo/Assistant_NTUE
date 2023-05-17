@@ -17,7 +17,7 @@ String getWeek(Week week) {
   }
 }
 
-List<ClassContainer> getWeekData(Week week, List<Curriculum> curriculums) {
+List<ClassContainer> getWeekData(String week, List<Curriculum> curriculums) {
   List<ClassContainer> classContainers = [];
   for (int index = 0; index < curriculums.length; index++) {
     if (curriculums[index].week == week) {
@@ -34,7 +34,7 @@ class WeekContainer extends StatelessWidget {
     required this.week,
     required this.curriculums,
   });
-  Week week;
+  String week;
   List<Curriculum> curriculums;
 
   @override
@@ -46,7 +46,7 @@ class WeekContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            getWeek(week),
+            week,
             style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
           ),
           const SizedBox(
