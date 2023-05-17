@@ -36,7 +36,7 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
     setState(() => isLoad = true);
     curriculums = await ClassDatabase.instance.readAllLesson();
     if (curriculums.isEmpty) {
-      initCurriculum();
+      await initCurriculum();
     }
     setState(() => isLoad = false);
   }
@@ -44,7 +44,7 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
   Future initCurriculum() async {
     setState(() => isLoad = true);
     var data = await get(Uri.parse(
-        'http://127.0.0.1:5000/done?a=${_account?.ID}&p=${_account?.password}'));
+        'http://127.0.0.1:5001/done?account=${_account?.ID}&password=${_account?.password}'));
     var map = jsonDecode(data.body);
     ClassData classData = ClassData(file: map, id: _account?.ID);
     curriculums = ClassData.curriculumData;
