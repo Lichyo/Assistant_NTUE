@@ -1,7 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
-import 'package:assistant/constant.dart';
 
 class ClassDatabase {
   static final ClassDatabase instance = ClassDatabase._init();
@@ -87,6 +86,11 @@ class ClassDatabase {
     final db = await instance.database;
     return db
         .delete(classTable, where: '${ClassField.id} = ?', whereArgs: [id]);
+  }
+
+  Future deleteAllLesson() async{
+    final db = await instance.database;
+    db.delete(classTable);
   }
 
   Future close() async {

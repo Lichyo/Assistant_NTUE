@@ -91,30 +91,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: (selectedPage != ScreenIndex.account)
           ? AppBar(
-              actions: [
-                Visibility(
-                  visible:
-                      selectedPage == ScreenIndex.curriculum ? true : false,
-                  child: GestureDetector(
-                    onLongPress: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const PrayPage()));
-                    },
-                    onTap: () {
-                      setState(() {
-                        selectedPage = ScreenIndex.calendar;
-                      });
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Icon(
-                        Icons.calendar_month,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
               title: const Text(
                 'NTUE Assistant',
                 style: TextStyle(
@@ -143,16 +119,7 @@ class _HomeState extends State<Home> {
                       });
                     },
                   ),
-                  MenuItem(
-                    text: 'Account',
-                    icon: Icons.person,
-                    itemCallback: () {
-                      setState(() {
-                        selectedPage = ScreenIndex.account;
-                        Navigator.pop(context);
-                      });
-                    },
-                  ),
+
                   MenuItem(
                     text: 'Note',
                     icon: Icons.book_rounded,
@@ -170,16 +137,6 @@ class _HomeState extends State<Home> {
                     itemCallback: () {
                       setState(() {
                         selectedPage = ScreenIndex.setting;
-                        Navigator.pop(context);
-                      });
-                    },
-                  ),
-                  MenuItem(
-                    text: 'Notification',
-                    icon: Icons.notifications,
-                    itemCallback: () {
-                      setState(() {
-                        selectedPage = ScreenIndex.notification;
                         Navigator.pop(context);
                       });
                     },
