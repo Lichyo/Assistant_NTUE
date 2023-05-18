@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/components/curriculum/week_container.dart';
-import 'package:assistant/constant.dart';
 import 'package:assistant/db/curriculum_database.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
@@ -69,6 +68,15 @@ class _BasicCurriculumScreenState extends State<BasicCurriculumScreen> {
       child: isLoad
           ? const CircularProgressIndicator()
           : Scaffold(
+              floatingActionButton: FloatingActionButton(
+                onPressed: () async{
+                  setState(() {
+                    ClassDatabase.instance.deleteAllLesson();
+                    refreshCurriculum();
+                  });
+                },
+                child: const Icon(Icons.refresh),
+              ),
               body: ListView(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,

@@ -89,6 +89,11 @@ class ClassDatabase {
         .delete(classTable, where: '${ClassField.id} = ?', whereArgs: [id]);
   }
 
+  Future deleteAllLesson() async{
+    final db = await instance.database;
+    db.delete(classTable);
+  }
+
   Future close() async {
     final db = await instance.database;
     db.close();
