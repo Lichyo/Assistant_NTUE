@@ -46,12 +46,12 @@ class _PrayPageState extends State<PrayPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Temple',
-          style: GoogleFonts.getFont('Delius', fontSize: 30.0),
-        ),
-      ),
+      // appBar: AppBar(
+      //   title: Text(
+      //     'Temple',
+      //     style: GoogleFonts.getFont('Delius', fontSize: 30.0),
+      //   ),
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -64,7 +64,7 @@ class _PrayPageState extends State<PrayPage> {
           ),
           Expanded(
             child: Text(
-              'Praying Count：$count',
+              'Praying Times：$count',
               style: GoogleFonts.getFont('Pacifico', fontSize: 35.0),
             ),
           ),

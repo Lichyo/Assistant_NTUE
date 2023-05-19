@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
 import 'package:assistant/components/rounded_button.dart';
+import 'package:assistant/db/curriculum_database.dart';
 import 'package:assistant/db/NoteDB.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:assistant/models/note/note.dart';
@@ -13,17 +14,27 @@ class AddNote extends StatefulWidget {
   State<AddNote> createState() => _AddNoteState();
 }
 
-ClassData classData = ClassData();
-
 class _AddNoteState extends State<AddNote> {
-  List<String> items = classData.getClassName();
   String? selectedValue;
+  List<String> items = [];
   String title = '';
   String description = '';
   CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
   var _selectedDay;
   _AddNoteState() {
     items.add('其他');
+  }
+  @override
+  void initState() {
+    super.initState();
+    getSubjectName();
+  }
+
+  Future getSubjectName() async{
+    var db = ClassDatabase.instance;
+    var curriculums = await db.readAllLesson();
+    print(curriculums);
+    // items = classData.getClassName();
   }
 
   @override

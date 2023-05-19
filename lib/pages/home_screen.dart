@@ -23,8 +23,11 @@ class _HomeState extends State<Home> {
   ScreenIndex selectedPage = ScreenIndex.account; // default
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  Account account =
-      Account(userName: 'Unknown', email: 'Unknown', ID: '000000000', password: '00000000');
+  Account account = Account(
+      userName: 'Unknown',
+      email: 'Unknown',
+      ID: '000000000',
+      password: '00000000');
 
   @override
   void initState() {
@@ -63,7 +66,11 @@ class _HomeState extends State<Home> {
       }
     }
     if (isUser == false) {
-      account = Account(userName: 'Unknown', email: 'Unknown', ID: '000000000', password: '00000000');
+      account = Account(
+          userName: 'Unknown',
+          email: 'Unknown',
+          ID: '000000000',
+          password: '00000000');
     }
   }
 
@@ -91,28 +98,6 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: (selectedPage != ScreenIndex.account)
           ? AppBar(
-              // actions: [
-              //   Visibility(
-              //     visible:
-              //         selectedPage == ScreenIndex.curriculum ? true : false,
-              //     child: GestureDetector(
-              //       onLongPress: () {
-              //         Navigator.of(context).push(MaterialPageRoute(
-              //             builder: (context) => const PrayPage()));
-              //       },
-              //       onTap: () {
-              //
-              //       },
-              //       child: const Padding(
-              //         padding: EdgeInsets.symmetric(horizontal: 20.0),
-              //         child: Icon(
-              //           Icons.refresh,
-              //           size: 30,
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ],
               title: const Text(
                 'NTUE Assistant',
                 style: TextStyle(
@@ -137,16 +122,6 @@ class _HomeState extends State<Home> {
                     itemCallback: () {
                       setState(() {
                         selectedPage = ScreenIndex.curriculum;
-                        Navigator.pop(context);
-                      });
-                    },
-                  ),
-                  MenuItem(
-                    text: 'Account',
-                    icon: Icons.person,
-                    itemCallback: () {
-                      setState(() {
-                        selectedPage = ScreenIndex.account;
                         Navigator.pop(context);
                       });
                     },

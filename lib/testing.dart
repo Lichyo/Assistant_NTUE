@@ -24,8 +24,8 @@ class _TestPageState extends State<TestPage> {
               var data = await get(Uri.parse('https://raw.githubusercontent.com/Lichyo/Assistant_NTUE/main/lib/assets/OUTPUT.json?token=GHSAT0AAAAAAB36P22MW6DIUGZDKQYPUH4MZCUSGHA'));
               var map = jsonDecode(data.body);
               ClassData classData = ClassData(file: map, id: '111016041');
-              for(int i = 0; i < ClassData.curriculumData.length; i++) {
-                print(ClassData.curriculumData[i].subject);
+              for(int i = 0; i < ClassData.curriculums.length; i++) {
+                print(ClassData.curriculums[i].subject);
               }
             },
             child: const Text('Testing Button'),

@@ -1,7 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
-import 'package:assistant/constant.dart';
 
 class ClassDatabase {
   static final ClassDatabase instance = ClassDatabase._init();

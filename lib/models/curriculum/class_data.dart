@@ -4,9 +4,9 @@ import 'curriculum.dart';
 class ClassData {
 
   ClassData({file, id}) {
-    curriculumData = initCurriculumData(file: file, id: id);
+    curriculums = initCurriculumData(file: file, id: id);
   }
-  static List<Curriculum> curriculumData = [];
+  static List<Curriculum> curriculums = [];
 
   List<Curriculum> getWeekData(
       {required List<Curriculum> curriculums, required String week}) {
@@ -21,8 +21,8 @@ class ClassData {
 
   List<String> getClassName() {
     List<String> className = [];
-    for (int index = 0; index < curriculumData.length; index++) {
-      className.add(curriculumData[index].subject);
+    for (int index = 0; index < curriculums.length; index++) {
+      className.add(curriculums[index].subject);
     }
     return className;
   }
