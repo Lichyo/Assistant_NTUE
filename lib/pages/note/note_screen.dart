@@ -14,6 +14,7 @@ class NoteScreen extends StatefulWidget {
 class _NoteScreenState extends State<NoteScreen> {
   bool isLoad = false;
   List<Note> notes = [];
+
   @override
   void initState() {
     refreshNotes();
