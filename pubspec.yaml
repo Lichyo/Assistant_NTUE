@@ -17,7 +17,8 @@ dependencies:
   cloud_firestore: ^4.4.4
   firebase_auth: ^4.0.0
   modal_progress_hud_nsn: ^0.3.0
-  rflutter_alert: ^2.0.4
+#  rflutter_alert: ^2.0.4
+  rflutter_alert: ^2.0.6
   http: ^0.13.5
   sqflite: ^2.2.5
   path: ^1.8.2
