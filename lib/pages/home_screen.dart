@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Curriculum',
                     icon: Icons.list,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.curriculum;
                         Navigator.pop(context);
@@ -129,7 +129,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Note',
                     icon: Icons.book_rounded,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.note;
                         Navigator.pop(context);
@@ -140,7 +140,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Setting',
                     icon: Icons.settings,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.setting;
                         Navigator.pop(context);
@@ -150,7 +150,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Issue Report',
                     icon: Icons.feedback_outlined,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.issueReport;
                         Navigator.pop(context);
@@ -160,7 +160,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     icon: Icons.login_rounded,
                     text: 'Log out',
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         _auth.signOut();
                         Navigator.of(context).push(MaterialPageRoute(

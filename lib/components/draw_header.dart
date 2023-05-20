@@ -5,7 +5,6 @@ class DrawHeader extends StatelessWidget {
   DrawHeader({
     super.key,
   });
-
   final _account = Account.instance;
 
   @override

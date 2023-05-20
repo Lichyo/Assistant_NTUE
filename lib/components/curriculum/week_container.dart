@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/components/curriculum/class_container.dart';
-import 'package:assistant/constant.dart';
 import 'package:assistant/models/curriculum/curriculum.dart';
-
-String getWeek(Week week) {
-  if (week == Week.mon) {
-    return 'Mon';
-  } else if (week == Week.tues) {
-    return 'Tues';
-  } else if (week == Week.wed) {
-    return 'Wed';
-  } else if (week == Week.thur) {
-    return 'Thur';
-  } else {
-    return 'Fri';
-  }
-}
 
 List<ClassContainer> getWeekData(String week, List<Curriculum> curriculums) {
   List<ClassContainer> classContainers = [];
@@ -27,7 +12,6 @@ List<ClassContainer> getWeekData(String week, List<Curriculum> curriculums) {
   return classContainers;
 }
 
-// ignore: must_be_immutable
 class WeekContainer extends StatelessWidget {
   WeekContainer({
     super.key,

@@ -60,7 +60,7 @@ class _NoteScreenState extends State<NoteScreen> {
                         final Note note = notes[index];
                         return NoteWidget(
                           note: note,
-                          noteCallback: () async {
+                          onLongPressed: () async {
                             final db = NoteDB.instance;
                             db.delete(note.id!);
                             refreshNotes();
