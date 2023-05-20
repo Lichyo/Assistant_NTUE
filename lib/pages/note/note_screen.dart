@@ -17,19 +17,22 @@ class _NoteScreenState extends State<NoteScreen> {
 
   @override
   void initState() {
-    refreshNotes();
     super.initState();
+    refreshNotes();
   }
 
   @override
   void dispose() {
-    NoteDB.instance.close();
     super.dispose();
+    NoteDB.instance.close();
   }
 
   Future refreshNotes() async {
     setState(() => isLoad = true);
-    notes = await NoteDB.instance.readAllNotes();
+    List<Note> tempNotes = await NoteDB.instance.readAllNotes();
+    setState(() {
+      notes = tempNotes;
+    });
     setState(() => isLoad = false);
   }
 
@@ -64,7 +67,6 @@ class _NoteScreenState extends State<NoteScreen> {
                             final db = NoteDB.instance;
                             db.delete(note.id!);
                             refreshNotes();
-                            print('Hello');
                           },
                         );
                       },
@@ -73,27 +75,4 @@ class _NoteScreenState extends State<NoteScreen> {
       ),
     );
   }
-
-  // Widget buildNotes() => StaggeredGridView.countBuilder(
-  //       padding: const EdgeInsets.all(8),
-  //       itemCount: notes.length,
-  //       staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-  //       crossAxisCount: 4,
-  //       mainAxisSpacing: 4,
-  //       crossAxisSpacing: 4,
-  //       itemBuilder: (context, index) {
-  //         final note = notes[index];
-  //
-  //         return GestureDetector(
-  //           onTap: () async {
-  //             await Navigator.of(context).push(MaterialPageRoute(
-  //               builder: (context) => NoteDetailPage(noteId: note.id!),
-  //             ));
-  //
-  //             refreshNotes();
-  //           },
-  //           child: NoteCardWidget(note: note, index: index),
-  //         );
-  //       },
-  //     );
 }

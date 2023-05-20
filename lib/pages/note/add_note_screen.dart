@@ -1,5 +1,4 @@
 import 'package:assistant/constant.dart';
-import 'package:assistant/models/lesson/lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:assistant/models/lesson/lesson_controller.dart';
@@ -16,52 +15,29 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
-  String? selectedSubject;
+  String? selectedValue;
   List<String> items = [];
   String title = '';
   String description = '';
   CalendarFormat _calendarFormat = CalendarFormat.month;
   var _selectedDay;
-
   _AddNoteState() {
     items.add('其他');
   }
   @override
-  void initState(){
+  void initState() {
     super.initState();
-    items = getSubjectName();
+    getSubjectName();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    NoteDB.instance.close();
-  }
-
-  Future initClassData() async {
-    LessonController.instance.lessons = await LessonDatabase.instance.readAllLesson();
-    LessonDatabase.instance.close();
-  }
-
-  List<String> getSubjectName() {
-    initClassData();
-    List<Lesson> lessons = LessonController.instance.lessons;
-    List<String> lessonSubjects = [];
-    for(int i = 0; i < lessons.length; i++) {
-      if(lessons[i].week == 'Mon') {
-        lessonSubjects.add(lessons[i].subject);
-      } else if(lessons[i].week == 'Tues') {
-        lessonSubjects.add(lessons[i].subject);
-      } else if(lessons[i].week == 'Wed') {
-        lessonSubjects.add(lessons[i].subject);
-      } else if(lessons[i].week == 'Thur') {
-        lessonSubjects.add(lessons[i].subject);
-      } else if(lessons[i].week == 'Fri') {
-        lessonSubjects.add(lessons[i].subject);
-      }
+  Future getSubjectName() async{
+    var db = LessonDatabase.instance;
+    var lessons = await db.readAllLesson();
+    for(int i = 0; i< lessons.length; i++) {
+      setState(() {
+        items.add(lessons[i].subject);
+      });
     }
-    return lessonSubjects;
   }
 
   @override
@@ -136,22 +112,22 @@ class _AddNoteState extends State<AddNote> {
                       ),
                       items: items
                           .map((item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ))
+                        value: item,
+                        child: Text(
+                          item,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ))
                           .toList(),
-                      value: selectedSubject,
+                      value: selectedValue,
                       onChanged: (value) {
                         setState(() {
-                          selectedSubject = value as String;
+                          selectedValue = value as String;
                         });
                       },
                       buttonStyleData: ButtonStyleData(
@@ -188,7 +164,7 @@ class _AddNoteState extends State<AddNote> {
                           radius: const Radius.circular(40),
                           thickness: MaterialStateProperty.all<double>(6),
                           thumbVisibility:
-                              MaterialStateProperty.all<bool>(true),
+                          MaterialStateProperty.all<bool>(true),
                         ),
                       ),
                       menuItemStyleData: const MenuItemStyleData(
@@ -226,7 +202,7 @@ class _AddNoteState extends State<AddNote> {
           ),
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
+            const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
             child: RoundedButton(
               title: 'Submit',
               color: Colors.blue,
@@ -236,7 +212,7 @@ class _AddNoteState extends State<AddNote> {
                   title: title,
                   description: description,
                   deadTime: _selectedDay,
-                  subject: selectedSubject.toString(),
+                  subject: selectedValue.toString(),
                 ));
                 Navigator.pop(context);
               },

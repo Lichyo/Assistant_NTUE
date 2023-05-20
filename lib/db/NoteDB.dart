@@ -8,12 +8,12 @@ class NoteDB {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await initDB('note.db'); // 內部資料夾
+    _database = await initDB('note.db');
     return _database!;
   }
 
   Future<Database> initDB(String filePath) async {
-    final dbPath = await getDatabasesPath(); // OS內建資料夾
+    final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
@@ -58,11 +58,10 @@ class NoteDB {
     final result = await db.query(noteTable, orderBy: orderBy);
     return result
         .map((json) => Note.fromJson(json))
-        .toList(); // where i s the json
+        .toList();
   }
 
   Future<int> update(Note note) async {
-    // why int?
     final db = await instance.database;
     return db.update(
       noteTable,

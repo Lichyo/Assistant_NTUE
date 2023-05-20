@@ -34,7 +34,10 @@ class _LessonPageState extends State<LessonPage> {
 
   Future refreshCurriculum() async {
     setState(() => isLoad = true);
-    lessons = await LessonDatabase.instance.readAllLesson();
+    final tempLessons = await LessonDatabase.instance.readAllLesson();
+    setState(() {
+      lessons = tempLessons;
+    });
     if (lessons.isEmpty) {
       await initCurriculum();
       isNoData = lessons.isEmpty ? true : false;
