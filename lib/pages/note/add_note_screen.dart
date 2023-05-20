@@ -230,6 +230,7 @@ class _AddNoteState extends State<AddNote> {
                   deadTime: _selectedDay,
                   subject: selectedSubject.toString(),
                 ));
+                NoteDB.instance.close();
                 Navigator.pop(context);
               },
             ),
