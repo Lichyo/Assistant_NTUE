@@ -1,10 +1,10 @@
 import 'package:assistant/constant.dart';
-import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/models/lesson/lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:assistant/models/curriculum/class_data.dart';
+import 'package:assistant/models/lesson/lesson_controller.dart';
 import 'package:assistant/components/rounded_button.dart';
-import 'package:assistant/db/curriculum_database.dart';
+import 'package:assistant/db/lesson_database.dart';
 import 'package:assistant/db/NoteDB.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:assistant/models/note/note.dart';
@@ -32,13 +32,13 @@ class _AddNoteState extends State<AddNote> {
     items = getSubjectName();
   }
   Future initClassData() async {
-    ClassData.curriculums = await ClassDatabase.instance.readAllLesson();
-    ClassDatabase.instance.close();
+    LessonController.instance.lessons = await LessonDatabase.instance.readAllLesson();
+    LessonDatabase.instance.close();
   }
 
   List<String> getSubjectName() {
     initClassData();
-    List<Curriculum> lessons = ClassData.curriculums;
+    List<Lesson> lessons = LessonController.instance.lessons;
     List<String> lessonSubjects = [];
     for(int i = 0; i < lessons.length; i++) {
       if(lessons[i].week == 'Mon') {

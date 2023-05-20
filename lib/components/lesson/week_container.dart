@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:assistant/components/curriculum/class_container.dart';
-import 'package:assistant/models/curriculum/curriculum.dart';
+import 'package:assistant/components/lesson/lesson_container.dart';
+import 'package:assistant/models/lesson/lesson.dart';
 
-List<ClassContainer> getWeekData(String week, List<Curriculum> curriculums) {
-  List<ClassContainer> classContainers = [];
-  for (int index = 0; index < curriculums.length; index++) {
-    if (curriculums[index].week == week) {
-      classContainers.add(ClassContainer(curriculum: curriculums[index]));
+List<LessonContainer> getWeekData(String week, List<Lesson> lessons) {
+  List<LessonContainer> lessonContainers = [];
+  for (int index = 0; index < lessons.length; index++) {
+    if (lessons[index].week == week) {
+      lessonContainers.add(LessonContainer(lesson: lessons[index]));
     }
   }
-  return classContainers;
+  return lessonContainers;
 }
 
 class WeekContainer extends StatelessWidget {
   WeekContainer({
     super.key,
     required this.week,
-    required this.curriculums,
+    required this.lessons,
   });
   String week;
-  List<Curriculum> curriculums;
+  List<Lesson> lessons;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class WeekContainer extends StatelessWidget {
             height: 5.0,
           ),
           Column(
-            children: getWeekData(week, curriculums),
+            children: getWeekData(week, lessons),
           ),
         ],
       ),
