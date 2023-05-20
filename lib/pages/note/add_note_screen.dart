@@ -31,6 +31,14 @@ class _AddNoteState extends State<AddNote> {
     super.initState();
     items = getSubjectName();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    NoteDB.instance.close();
+  }
+
   Future initClassData() async {
     ClassData.curriculums = await ClassDatabase.instance.readAllLesson();
     ClassDatabase.instance.close();
@@ -230,7 +238,6 @@ class _AddNoteState extends State<AddNote> {
                   deadTime: _selectedDay,
                   subject: selectedSubject.toString(),
                 ));
-                NoteDB.instance.close();
                 Navigator.pop(context);
               },
             ),
