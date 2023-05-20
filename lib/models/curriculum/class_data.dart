@@ -19,14 +19,6 @@ class ClassData {
     return newCurriculum;
   }
 
-  List<String> getClassName() {
-    List<String> className = [];
-    for (int index = 0; index < curriculums.length; index++) {
-      className.add(curriculums[index].subject);
-    }
-    return className;
-  }
-
   List<Curriculum> initCurriculumData({required Map file, required String id}) {
     var data = file[id];
     List<Curriculum> curriculums = [];

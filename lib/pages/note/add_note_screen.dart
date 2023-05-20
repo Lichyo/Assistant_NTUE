@@ -1,4 +1,5 @@
 import 'package:assistant/constant.dart';
+import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:assistant/models/curriculum/class_data.dart';
@@ -15,26 +16,44 @@ class AddNote extends StatefulWidget {
 }
 
 class _AddNoteState extends State<AddNote> {
-  String? selectedValue;
+  String? selectedSubject;
   List<String> items = [];
   String title = '';
   String description = '';
-  CalendarFormat _calendarFormat = CalendarFormat.twoWeeks;
+  CalendarFormat _calendarFormat = CalendarFormat.month;
   var _selectedDay;
+
   _AddNoteState() {
     items.add('其他');
   }
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    getSubjectName();
+    items = getSubjectName();
+  }
+  Future initClassData() async {
+    ClassData.curriculums = await ClassDatabase.instance.readAllLesson();
+    ClassDatabase.instance.close();
   }
 
-  Future getSubjectName() async{
-    var db = ClassDatabase.instance;
-    var curriculums = await db.readAllLesson();
-    print(curriculums);
-    // items = classData.getClassName();
+  List<String> getSubjectName() {
+    initClassData();
+    List<Curriculum> lessons = ClassData.curriculums;
+    List<String> lessonSubjects = [];
+    for(int i = 0; i < lessons.length; i++) {
+      if(lessons[i].week == 'Mon') {
+        lessonSubjects.add(lessons[i].subject);
+      } else if(lessons[i].week == 'Tues') {
+        lessonSubjects.add(lessons[i].subject);
+      } else if(lessons[i].week == 'Wed') {
+        lessonSubjects.add(lessons[i].subject);
+      } else if(lessons[i].week == 'Thur') {
+        lessonSubjects.add(lessons[i].subject);
+      } else if(lessons[i].week == 'Fri') {
+        lessonSubjects.add(lessons[i].subject);
+      }
+    }
+    return lessonSubjects;
   }
 
   @override
@@ -84,8 +103,8 @@ class _AddNoteState extends State<AddNote> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton2(
                       isExpanded: true,
-                      hint: Row(
-                        children: const [
+                      hint: const Row(
+                        children: [
                           Icon(
                             Icons.list,
                             size: 16,
@@ -121,10 +140,10 @@ class _AddNoteState extends State<AddNote> {
                                 ),
                               ))
                           .toList(),
-                      value: selectedValue,
+                      value: selectedSubject,
                       onChanged: (value) {
                         setState(() {
-                          selectedValue = value as String;
+                          selectedSubject = value as String;
                         });
                       },
                       buttonStyleData: ButtonStyleData(
@@ -209,7 +228,7 @@ class _AddNoteState extends State<AddNote> {
                   title: title,
                   description: description,
                   deadTime: _selectedDay,
-                  subject: selectedValue.toString(),
+                  subject: selectedSubject.toString(),
                 ));
                 Navigator.pop(context);
               },
