@@ -77,7 +77,4 @@ const kMessageContainerDecoration = BoxDecoration(
 const kTextFieldTextStyle = TextStyle(
   color: Colors.black,
 );
-
-enum Week { mon, tues, wed, thur, fri }
-
 enum ScreenIndex {curriculum, account, note, setting, notification, issueReport, logOut, calendar}

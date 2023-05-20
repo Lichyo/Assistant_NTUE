@@ -6,17 +6,17 @@ class MenuItem extends StatelessWidget {
     super.key,
     required this.icon,
     required this.text,
-    required this.itemCallback,
+    required this.onPressed,
   });
 
   final IconData icon;
   final String text;
-  final VoidCallback itemCallback;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: itemCallback,
+      onTap: onPressed,
       child: Container(
         padding: const EdgeInsets.only(left: 30.0, top: 20.0),
         width: double.infinity,

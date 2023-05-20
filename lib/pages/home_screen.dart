@@ -1,4 +1,3 @@
-import 'package:assistant/models/curriculum/curriculum.dart';
 import 'package:assistant/screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
@@ -8,7 +7,6 @@ import 'package:assistant/pages/account/account_screen.dart';
 import 'package:assistant/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/models/account/account.dart';
-import 'package:assistant/pages/pray_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,14 +18,10 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   User? _user;
   ScreenController screenController = ScreenController();
-  ScreenIndex selectedPage = ScreenIndex.account; // default
+  ScreenIndex selectedPage = ScreenIndex.account;
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  Account account = Account(
-      userName: 'Unknown',
-      email: 'Unknown',
-      ID: '000000000',
-      password: '00000000');
+  late Account account;
 
   @override
   void initState() {
@@ -117,9 +111,9 @@ class _HomeState extends State<Home> {
               Column(
                 children: [
                   MenuItem(
-                    text: 'Curriculum',
+                    text: 'Lesson',
                     icon: Icons.list,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.curriculum;
                         Navigator.pop(context);
@@ -129,7 +123,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Note',
                     icon: Icons.book_rounded,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.note;
                         Navigator.pop(context);
@@ -140,7 +134,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Setting',
                     icon: Icons.settings,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.setting;
                         Navigator.pop(context);
@@ -150,7 +144,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     text: 'Issue Report',
                     icon: Icons.feedback_outlined,
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         selectedPage = ScreenIndex.issueReport;
                         Navigator.pop(context);
@@ -160,7 +154,7 @@ class _HomeState extends State<Home> {
                   MenuItem(
                     icon: Icons.login_rounded,
                     text: 'Log out',
-                    itemCallback: () {
+                    onPressed: () {
                       setState(() {
                         _auth.signOut();
                         Navigator.of(context).push(MaterialPageRoute(

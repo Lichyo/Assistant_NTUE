@@ -1,11 +1,9 @@
-import 'package:assistant/pages/curriculum/basic_curriculum_screen.dart';
+import 'package:assistant/pages/lesson/lesson_page.dart';
 import 'package:assistant/pages/note/note_screen.dart';
 import 'package:assistant/pages/account/account_screen.dart';
-import 'package:flutter/material.dart';
 import 'pages/setting/setting_screen.dart';
 import 'pages/notification/notification_screen.dart';
 import 'pages/issue_report_screen/issue_report_screen.dart';
-import 'pages/curriculum/calendar_curriculum_screen.dart';
 import 'constant.dart';
 
 class ScreenController {
@@ -13,7 +11,7 @@ class ScreenController {
 
   getPage(ScreenIndex screenIndex) {
     if (screenIndex == ScreenIndex.curriculum) {
-      return const BasicCurriculumScreen();
+      return const LessonPage();
     } else if (screenIndex == ScreenIndex.account) {
       return const AccountScreen();
     } else if (screenIndex == ScreenIndex.note) {
@@ -27,7 +25,6 @@ class ScreenController {
     } else if (screenIndex == ScreenIndex.logOut) {
       isLogin = false;
     } else if (screenIndex == ScreenIndex.calendar) {
-      return const CalendarCurriculumScreen();
     }
   }
 }

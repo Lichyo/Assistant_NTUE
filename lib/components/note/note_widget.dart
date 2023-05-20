@@ -2,18 +2,16 @@ import 'package:assistant/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:assistant/db/NoteDB.dart';
 
 class NoteWidget extends StatelessWidget {
-  const NoteWidget({super.key, required this.note, required this.noteCallback});
+  const NoteWidget({super.key, required this.note, required this.onLongPressed});
   final Note note;
-  final VoidCallback noteCallback;
+  final VoidCallback onLongPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: noteCallback,
+      onLongPress: onLongPressed,
       child: Column(
         children: [
           Card(

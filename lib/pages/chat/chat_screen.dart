@@ -14,7 +14,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  @override
   final _auth = FirebaseAuth.instance;
   late String messageText;
   late String? senderEmail;
@@ -38,17 +37,18 @@ class _ChatScreenState extends State<ChatScreen> {
     getCurrentUser();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
           IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () {
-                // _auth.signOut();
-                Navigator.pop(context);
-              }),
+            icon: const Icon(Icons.close),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
         ],
         title: Text(widget.className),
         backgroundColor: Colors.blue,
@@ -58,7 +58,9 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MessageStream(className: widget.className,),
+            MessageStream(
+              className: widget.className,
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
