@@ -2,6 +2,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationApi {
   static final _notifications = FlutterLocalNotificationsPlugin();
+
   Future<void> initNotification() async {
     AndroidInitializationSettings initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -33,7 +34,9 @@ class NotificationApi {
         icon: "@mipmap/ic_launcher",
       ),
       iOS: DarwinNotificationDetails(
-
+        presentAlert: true,
+        presentSound: true,
+        presentBadge: true,
       ),
     );
   }
@@ -42,7 +45,4 @@ class NotificationApi {
       {int id = 0, String? title, String? body, String? payload}) async {
     return _notifications.show(id, title, body, await notificationDetails());
   }
-
-
-
 }

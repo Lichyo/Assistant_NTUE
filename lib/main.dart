@@ -2,13 +2,13 @@ import 'package:assistant/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
-import 'pages/chat/chat_screen.dart';
 import 'testing.dart';
-import 'pages/pray_page.dart';
+import 'services/notification_api.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  NotificationApi().initNotification();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,

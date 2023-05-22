@@ -31,8 +31,10 @@ class _NoteScreenState extends State<NoteScreen> {
 
   Future refreshNotes() async {
     setState(() => isLoad = true);
-    notes = await NoteDB.instance.readAllNotes();
-    print(notes.length);
+    List<Note> tempNotes = await NoteDB.instance.readAllNotes();
+    setState(() {
+      notes = tempNotes;
+    });
     if(notes.isEmpty && !isInit) {
       initNotes();
       isInit = true;
@@ -78,10 +80,12 @@ class _NoteScreenState extends State<NoteScreen> {
                         return NoteWidget(
                           note: note,
                           onPressed: () async {
+                            print('notification onPressed');
                             await NotificationApi().showNotification(
                               title: note.subject,
                               body: note.description,
                             );
+                            print('works');
                           },
                           onLongPressed: () async {
                             final db = NoteDB.instance;
