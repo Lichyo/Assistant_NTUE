@@ -14,6 +14,7 @@ class NoteScreen extends StatefulWidget {
 
 class _NoteScreenState extends State<NoteScreen> {
   bool isLoad = false;
+  bool isInit = true;
   List<Note> notes = [];
 
   @override
@@ -30,22 +31,22 @@ class _NoteScreenState extends State<NoteScreen> {
 
   Future refreshNotes() async {
     setState(() => isLoad = true);
-    List<Note> tempNotes = await NoteDB.instance.readAllNotes();
-    if(notes.isEmpty) {
+    notes = await NoteDB.instance.readAllNotes();
+    print(notes.length);
+    if(notes.isEmpty && !isInit) {
       initNotes();
+      isInit = true;
+      refreshNotes();
     }
-    setState(() {
-      notes = tempNotes;
-    });
     setState(() => isLoad = false);
   }
 
   Future initNotes() async {
     final db = NoteDB.instance;
     db.create(Note(
-      title: '',
-      description: '',
-      subject: '其他',
+      title: '長按以刪除Note',
+      description: '這裡可以放詳細資訊',
+      subject: '使用說明',
       deadTime: DateTime(2023, 7, 20),
     ));
   }

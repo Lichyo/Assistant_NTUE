@@ -32,7 +32,9 @@ class NotificationApi {
         importance: Importance.max,
         icon: "@mipmap/ic_launcher",
       ),
-      //iOS: IOSNotificationDetails(),
+      iOS: DarwinNotificationDetails(
+
+      ),
     );
   }
 
