@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 import 'package:assistant/db/NoteDB.dart';
 import 'package:assistant/components/note/note_widget.dart';
+import 'package:assistant/services/notification_api.dart';
 
 class NoteScreen extends StatefulWidget {
   const NoteScreen({Key? key}) : super(key: key);
@@ -30,10 +31,23 @@ class _NoteScreenState extends State<NoteScreen> {
   Future refreshNotes() async {
     setState(() => isLoad = true);
     List<Note> tempNotes = await NoteDB.instance.readAllNotes();
+    if(notes.isEmpty) {
+      initNotes();
+    }
     setState(() {
       notes = tempNotes;
     });
     setState(() => isLoad = false);
+  }
+
+  Future initNotes() async {
+    final db = NoteDB.instance;
+    db.create(Note(
+      title: '',
+      description: '',
+      subject: '其他',
+      deadTime: DateTime(2023, 7, 20),
+    ));
   }
 
   @override
@@ -48,7 +62,6 @@ class _NoteScreenState extends State<NoteScreen> {
           },
           child: const Icon(Icons.add),
         ),
-        // body: const NoteList(),
         body: Center(
           child: isLoad
               ? const CircularProgressIndicator()
@@ -63,6 +76,12 @@ class _NoteScreenState extends State<NoteScreen> {
                         final Note note = notes[index];
                         return NoteWidget(
                           note: note,
+                          onPressed: () async {
+                            await NotificationApi().showNotification(
+                              title: note.subject,
+                              body: note.description,
+                            );
+                          },
                           onLongPressed: () async {
                             final db = NoteDB.instance;
                             db.delete(note.id!);

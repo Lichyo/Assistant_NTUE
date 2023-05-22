@@ -202,7 +202,7 @@ class _AddNoteState extends State<AddNote> {
           ),
           Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 30.0, vertical: 50.0),
+            const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
             child: RoundedButton(
               title: 'Submit',
               color: Colors.blue,

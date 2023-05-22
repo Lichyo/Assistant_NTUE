@@ -4,14 +4,21 @@ import 'package:assistant/models/note/note.dart';
 import 'package:intl/intl.dart';
 
 class NoteWidget extends StatelessWidget {
-  const NoteWidget({super.key, required this.note, required this.onLongPressed});
+  const NoteWidget(
+      {super.key,
+      required this.note,
+      required this.onLongPressed,
+      required this.onPressed});
+
   final Note note;
   final VoidCallback onLongPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onLongPress: onLongPressed,
+      onTap: onPressed,
       child: Column(
         children: [
           Card(
