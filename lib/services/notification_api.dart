@@ -19,9 +19,11 @@ class NotificationApi {
       iOS: initializationSettingIOS,
     );
 
-    await _notifications.initialize(initializationSettings,
-        onDidReceiveNotificationResponse:
-            (NotificationResponse notificationResponse) async {});
+    await _notifications.initialize(
+      initializationSettings,
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) async {},
+    );
   }
 
   static Future notificationDetails() async {
@@ -42,7 +44,6 @@ class NotificationApi {
   }
 
   Future showNotification(
-      {int id = 0, String? title, String? body, String? payload}) async {
-    return _notifications.show(id, title, body, await notificationDetails());
-  }
+          {int id = 0, String? title, String? body, String? payload}) async =>
+      _notifications.show(id, title, body, await notificationDetails());
 }

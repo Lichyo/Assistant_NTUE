@@ -5,7 +5,14 @@
         android:label="assistant"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
-        <activity
+       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
+       <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">
+           <intent-filter>
+               <action android:name="android.intent.action.BOOT_COMPLETED"/>
+               <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+           </intent-filter>
+       </receiver>
+       <activity
             android:showWhenLocked="true"
             android:turnScreenOn="true"
             android:name=".MainActivity"

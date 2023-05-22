@@ -82,7 +82,7 @@ class _NoteScreenState extends State<NoteScreen> {
                           onPressed: () async {
                             print('notification onPressed');
                             await NotificationApi().showNotification(
-                              title: note.subject,
+                              title: '${note.title}-${note.subject}',
                               body: note.description,
                             );
                             print('works');

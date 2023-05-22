@@ -21,7 +21,7 @@ class Note {
     description: json[NoteField.description] as String,
     subject: json[NoteField.subject] as String,
     deadTime: DateTime.parse(
-        json[NoteField.deadTime] as String), // special object iso
+        json[NoteField.deadTime] as String),
   );
 
   Map<String, Object?> toJson() => {
@@ -48,7 +48,8 @@ class Note {
       );
 
   Duration getLastTime() {
-    final Duration duration = deadTime.difference(DateTime.now());
+    Duration duration = deadTime.difference(DateTime.now());
+    duration += const Duration(days: 1);
     return duration;
   }
 }

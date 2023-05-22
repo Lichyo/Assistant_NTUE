@@ -26,6 +26,7 @@ dependencies:
   flutter_local_notifications: ^13.0.0
   google_fonts: ^4.0.4
   just_audio: ^0.9.32
+  rxdart: ^0.27.7
 
 
 dev_dependencies:
