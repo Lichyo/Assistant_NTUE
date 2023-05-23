@@ -80,17 +80,21 @@ class _NoteScreenState extends State<NoteScreen> {
                         return NoteWidget(
                           note: note,
                           onPressed: () async {
-                            print('notification onPressed');
-                            // await NotificationApi().showNotification(
-                            //   title: '${note.title}-${note.subject}',
-                            //   body: note.description,
-                            // );
                             await NotificationApi.showScheduleNotification(
-                                title: 'showScheduleNotification',
-                                body: 'showScheduleNotification',
-                                scheduledDate: DateTime.now()
-                                    .add(const Duration(seconds: 3)));
-                            print('works');
+                                title: '${note.title}-${note.subject}',
+                                body: note.description,
+                                scheduledDate: note.deadTime
+                                    .add(const Duration(days: -7, hours: 8)));
+                            await NotificationApi.showScheduleNotification(
+                                title: '${note.title}-${note.subject}',
+                                body: note.description,
+                                scheduledDate: note.deadTime
+                                    .add(const Duration(days: -3, hours: 8)));
+                            await NotificationApi.showScheduleNotification(
+                                title: '${note.title}-${note.subject}',
+                                body: note.description,
+                                scheduledDate: note.deadTime
+                                    .add(const Duration(hours: 8)));
                           },
                           onLongPressed: () async {
                             final db = NoteDB.instance;
