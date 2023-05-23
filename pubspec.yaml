@@ -28,6 +28,8 @@ dependencies:
   just_audio: ^0.9.32
   rxdart: ^0.27.7
   timezone: ^0.9.2
+  image_picker: ^0.8.7+5
+  permission_handler: ^10.2.0
 
 
 dev_dependencies:
