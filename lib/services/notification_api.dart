@@ -1,12 +1,13 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class NotificationApi {
   static final _notifications = FlutterLocalNotificationsPlugin();
-
+  static final onNotification = BehaviorSubject<String?>();
   Future<void> initNotification() async {
     AndroidInitializationSettings initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
-
     var initializationSettingIOS = DarwinInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
@@ -23,6 +24,25 @@ class NotificationApi {
       initializationSettings,
       onDidReceiveNotificationResponse:
           (NotificationResponse notificationResponse) async {},
+    );
+  }
+
+  static Future<void> showScheduleNotification({
+    int id = 0,
+    String? title,
+    String? body,
+    String? payload,
+    required DateTime scheduledDate,
+  }) async {
+    return await _notifications.zonedSchedule(
+      id,
+      title,
+      body,
+      tz.TZDateTime.from(scheduledDate, tz.local),
+      await notificationDetails(),
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      androidAllowWhileIdle: true,
     );
   }
 

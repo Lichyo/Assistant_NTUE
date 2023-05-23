@@ -35,7 +35,7 @@ class _NoteScreenState extends State<NoteScreen> {
     setState(() {
       notes = tempNotes;
     });
-    if(notes.isEmpty && !isInit) {
+    if (notes.isEmpty && !isInit) {
       initNotes();
       isInit = true;
       refreshNotes();
@@ -81,10 +81,15 @@ class _NoteScreenState extends State<NoteScreen> {
                           note: note,
                           onPressed: () async {
                             print('notification onPressed');
-                            await NotificationApi().showNotification(
-                              title: '${note.title}-${note.subject}',
-                              body: note.description,
-                            );
+                            // await NotificationApi().showNotification(
+                            //   title: '${note.title}-${note.subject}',
+                            //   body: note.description,
+                            // );
+                            await NotificationApi.showScheduleNotification(
+                                title: 'showScheduleNotification',
+                                body: 'showScheduleNotification',
+                                scheduledDate: DateTime.now()
+                                    .add(const Duration(seconds: 3)));
                             print('works');
                           },
                           onLongPressed: () async {

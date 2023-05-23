@@ -30,10 +30,10 @@ class _AddNoteState extends State<AddNote> {
     getSubjectName();
   }
 
-  Future getSubjectName() async{
+  Future getSubjectName() async {
     var db = LessonDatabase.instance;
     var lessons = await db.readAllLesson();
-    for(int i = 0; i< lessons.length; i++) {
+    for (int i = 0; i < lessons.length; i++) {
       setState(() {
         items.add(lessons[i].subject);
       });
@@ -112,17 +112,17 @@ class _AddNoteState extends State<AddNote> {
                       ),
                       items: items
                           .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ))
+                                value: item,
+                                child: Text(
+                                  item,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ))
                           .toList(),
                       value: selectedValue,
                       onChanged: (value) {
@@ -164,7 +164,7 @@ class _AddNoteState extends State<AddNote> {
                           radius: const Radius.circular(40),
                           thickness: MaterialStateProperty.all<double>(6),
                           thumbVisibility:
-                          MaterialStateProperty.all<bool>(true),
+                              MaterialStateProperty.all<bool>(true),
                         ),
                       ),
                       menuItemStyleData: const MenuItemStyleData(
@@ -202,7 +202,7 @@ class _AddNoteState extends State<AddNote> {
           ),
           Padding(
             padding:
-            const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
             child: RoundedButton(
               title: 'Submit',
               color: Colors.blue,
@@ -211,7 +211,7 @@ class _AddNoteState extends State<AddNote> {
                 db.create(Note(
                   title: title,
                   description: description,
-                  deadTime: _selectedDay,
+                  deadTime: _selectedDay.add(const Duration(days: 1)),
                   subject: selectedValue.toString(),
                 ));
                 Navigator.pop(context);
