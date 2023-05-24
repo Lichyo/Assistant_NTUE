@@ -14,7 +14,7 @@ class NoteScreen extends StatefulWidget {
 
 class _NoteScreenState extends State<NoteScreen> {
   bool isLoad = false;
-  bool isInit = true;
+  bool isInit = false;
   List<Note> notes = [];
 
   @override
@@ -51,6 +51,13 @@ class _NoteScreenState extends State<NoteScreen> {
       subject: '使用說明',
       deadTime: DateTime(2023, 7, 20),
     ));
+
+    db.create(Note(
+      title: '點擊以開啟Note提醒',
+      description: '提醒將會在倒數七日、三日、當日發出',
+      subject: '使用說明',
+      deadTime: DateTime(2023, 7, 20),
+    ));
   }
 
   @override
@@ -80,6 +87,11 @@ class _NoteScreenState extends State<NoteScreen> {
                         return NoteWidget(
                           note: note,
                           onPressed: () async {
+                            // await NotificationApi.showScheduleNotification(
+                            //     title: '${note.title}-${note.subject}',
+                            //     body: note.description,
+                            //     scheduledDate: DateTime.now()
+                            //         .add(const Duration(seconds: 5)));
                             await NotificationApi.showScheduleNotification(
                                 title: '${note.title}-${note.subject}',
                                 body: note.description,

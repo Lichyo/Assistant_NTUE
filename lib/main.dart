@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'services/notification_api.dart';
+import 'testing.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
