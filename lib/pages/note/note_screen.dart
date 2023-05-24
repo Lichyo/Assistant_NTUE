@@ -16,6 +16,9 @@ class _NoteScreenState extends State<NoteScreen> {
   bool isLoad = false;
   bool isInit = false;
   List<Note> notes = [];
+  final snackBar = const SnackBar(
+      content: Text(''
+          '輕觸筆記以開啟通知！'),);
 
   @override
   void initState() {
@@ -68,6 +71,7 @@ class _NoteScreenState extends State<NoteScreen> {
           onPressed: () async {
             await Navigator.of(context)
                 .push(MaterialPageRoute(builder: (context) => const AddNote()));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
             refreshNotes();
           },
           child: const Icon(Icons.add),
@@ -87,11 +91,6 @@ class _NoteScreenState extends State<NoteScreen> {
                         return NoteWidget(
                           note: note,
                           onPressed: () async {
-                            // await NotificationApi.showScheduleNotification(
-                            //     title: '${note.title}-${note.subject}',
-                            //     body: note.description,
-                            //     scheduledDate: DateTime.now()
-                            //         .add(const Duration(seconds: 5)));
                             await NotificationApi.showScheduleNotification(
                                 title: '${note.title}-${note.subject}',
                                 body: note.description,
