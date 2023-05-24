@@ -8,7 +8,7 @@ class NoteDB {
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await initDB('note.db');
+    _database = await initDB(noteTable);
     return _database!;
   }
 

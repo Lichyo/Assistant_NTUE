@@ -17,8 +17,7 @@ class _NoteScreenState extends State<NoteScreen> {
   bool isInit = false;
   List<Note> notes = [];
   final snackBar = const SnackBar(
-    content: Text(''
-        '輕觸筆記以開啟通知！'),
+    content: Text('輕觸筆記以開啟通知！'),
   );
 
   @override
