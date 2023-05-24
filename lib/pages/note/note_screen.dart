@@ -17,8 +17,9 @@ class _NoteScreenState extends State<NoteScreen> {
   bool isInit = false;
   List<Note> notes = [];
   final snackBar = const SnackBar(
-      content: Text(''
-          '輕觸筆記以開啟通知！'),);
+    content: Text(''
+        '輕觸筆記以開啟通知！'),
+  );
 
   @override
   void initState() {
@@ -93,19 +94,41 @@ class _NoteScreenState extends State<NoteScreen> {
                           onPressed: () async {
                             await NotificationApi.showScheduleNotification(
                                 title: '${note.title}-${note.subject}',
-                                body: note.description,
-                                scheduledDate: note.deadTime
-                                    .add(const Duration(days: -7, hours: 8)));
-                            await NotificationApi.showScheduleNotification(
-                                title: '${note.title}-${note.subject}',
-                                body: note.description,
-                                scheduledDate: note.deadTime
-                                    .add(const Duration(days: -3, hours: 8)));
-                            await NotificationApi.showScheduleNotification(
-                                title: '${note.title}-${note.subject}',
-                                body: note.description,
-                                scheduledDate: note.deadTime
-                                    .add(const Duration(hours: 8)));
+                                body: '${note.title} Notification test.',
+                                scheduledDate: DateTime.now()
+                                    .add(const Duration(seconds: 3)));
+                            if (note.deadTime.compareTo(DateTime.now()
+                                    .add(const Duration(days: 4))) >
+                                0) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('將在三天後發出提醒'),
+                                ),
+                              );
+                              await NotificationApi.showScheduleNotification(
+                                  title: '${note.title}-${note.subject}',
+                                  body: note.description,
+                                  scheduledDate: note.deadTime
+                                      .add(const Duration(days: -3, hours: 8)));
+                            }
+                            if (note.deadTime.compareTo(DateTime.now()
+                                    .add(const Duration(days: 8))) >
+                                0) {
+                              await NotificationApi.showScheduleNotification(
+                                  title: '${note.title}-${note.subject}',
+                                  body: note.description,
+                                  scheduledDate: note.deadTime
+                                      .add(const Duration(days: -7, hours: 8)));
+                            }
+                            if (note.deadTime.compareTo(DateTime.now()
+                                    .add(const Duration(days: 1))) >
+                                0) {
+                              await NotificationApi.showScheduleNotification(
+                                  title: '${note.title}-${note.subject}',
+                                  body: note.description,
+                                  scheduledDate: note.deadTime
+                                      .add(const Duration(hours: 8)));
+                            }
                           },
                           onLongPressed: () async {
                             final db = NoteDB.instance;

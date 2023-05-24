@@ -54,11 +54,8 @@ class NoteDB {
 
   Future<List<Note>> readAllNotes() async {
     final db = await instance.database;
-    print('final db = await instance.database;');
     const orderBy = '${NoteField.deadTime} ASC';
-    print('const orderBy = ${NoteField.deadTime} ASC');
     final result = await db.query(noteTable, orderBy: orderBy);
-    print('final result = await db.query(noteTable, orderBy: orderBy);');
     return result
         .map((json) => Note.fromJson(json))
         .toList();
