@@ -32,6 +32,15 @@ class _LessonPageState extends State<LessonPage> {
     LessonDatabase.instance.close();
   }
 
+  bool isWeekHasData(String week) {
+    for (int index = 0; index < lessons.length; index++) {
+      if (lessons[index].week == week) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   Future refreshCurriculum() async {
     setState(() => isLoad = true);
     final tempLessons = await LessonDatabase.instance.readAllLesson();
@@ -52,6 +61,10 @@ class _LessonPageState extends State<LessonPage> {
     LessonController.instance.initLesson(file: map, id: _account?.ID);
     lessons = LessonController.instance.readAllLesson();
     for (int i = 0; i < lessons.length; i++) {
+      if(lessons[i].subject == "false") {
+        isNoData = true;
+        return;
+      }
       var classData = lessons[i];
       var db = LessonDatabase.instance;
       db.create(
@@ -115,11 +128,26 @@ class _LessonPageState extends State<LessonPage> {
                     children: [
                       Column(
                         children: [
-                          WeekContainer(week: 'Mon', lessons: lessons),
-                          WeekContainer(week: 'Tues', lessons: lessons),
-                          WeekContainer(week: 'Wed', lessons: lessons),
-                          WeekContainer(week: 'Thur', lessons: lessons),
-                          WeekContainer(week: 'Fri', lessons: lessons),
+                          Visibility(
+                            visible: isWeekHasData('Mon'),
+                            child: WeekContainer(week: 'Mon', lessons: lessons),
+                          ),
+                          Visibility(
+                            visible: isWeekHasData('Tues'),
+                            child: WeekContainer(week: 'Tues', lessons: lessons),
+                          ),
+                          Visibility(
+                            visible: isWeekHasData('Wed'),
+                            child: WeekContainer(week: 'Wed', lessons: lessons),
+                          ),
+                          Visibility(
+                            visible: isWeekHasData('Thur'),
+                            child: WeekContainer(week: 'Thur', lessons: lessons),
+                          ),
+                          Visibility(
+                            visible: isWeekHasData('Fri'),
+                            child: WeekContainer(week: 'Fri', lessons: lessons),
+                          ),
                         ],
                       ),
                     ],
