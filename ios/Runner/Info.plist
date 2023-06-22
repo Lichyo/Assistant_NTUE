@@ -53,6 +53,7 @@
     <array>
       <string>sms</string>
       <string>tel</string>
+      <string>mailto</string>
     </array>
 </dict>
 </plist>

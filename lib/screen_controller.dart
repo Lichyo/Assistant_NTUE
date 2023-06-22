@@ -21,7 +21,7 @@ class ScreenController {
     } else if (screenIndex == ScreenIndex.notification) {
       return const NotificationScreen();
     } else if (screenIndex == ScreenIndex.issueReport) {
-      return const IssueReportScreen();
+      return IssueReportScreen();
     } else if (screenIndex == ScreenIndex.logOut) {
       isLogin = false;
     } else if (screenIndex == ScreenIndex.calendar) {

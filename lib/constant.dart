@@ -84,3 +84,4 @@ const kTextFieldTextStyle = TextStyle(
   color: Colors.black,
 );
 enum ScreenIndex {curriculum, account, note, setting, notification, issueReport, logOut, calendar}
+
