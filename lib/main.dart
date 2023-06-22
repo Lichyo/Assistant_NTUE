@@ -1,4 +1,5 @@
 import 'package:assistant/view/home_screen.dart';
+import 'package:assistant/view/issue_report_screen/issue_report_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +26,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      // home: Home(),
+      home: IssueReportScreen(),
     );
   }
 }

@@ -7,6 +7,12 @@ const kTitleTextStyle = TextStyle(
   fontFamily: 'Ubuntu',
 );
 
+const kAppBarTextStyle = TextStyle(
+  fontSize: 30.0,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'Ubuntu',
+);
+
 const kTextFieldDecoration = InputDecoration(
   labelText: '',
   hintStyle: TextStyle(
