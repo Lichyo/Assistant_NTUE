@@ -1,5 +1,5 @@
-import 'package:assistant/pages/account/login_screen.dart';
-import 'package:assistant/pages/account/register_screen.dart';
+import 'package:assistant/view/account/login_screen.dart';
+import 'package:assistant/view/account/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/components/rounded_button.dart';

@@ -1,7 +1,7 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
-import 'package:assistant/pages/home_screen.dart';
+import 'package:assistant/view/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

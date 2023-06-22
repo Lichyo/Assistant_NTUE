@@ -1,4 +1,4 @@
-import 'package:assistant/pages/note/add_note_screen.dart';
+import 'package:assistant/view/note/add_note_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 import 'package:assistant/db/NoteDB.dart';

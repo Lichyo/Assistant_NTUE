@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:assistant/pages/account/account_screen.dart';
+import 'package:assistant/view/account/account_screen.dart';
 import 'package:assistant/constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/models/account/account.dart';

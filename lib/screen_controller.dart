@@ -1,9 +1,9 @@
-import 'package:assistant/pages/lesson/lesson_page.dart';
-import 'package:assistant/pages/note/note_screen.dart';
-import 'package:assistant/pages/account/account_screen.dart';
-import 'pages/setting/setting_screen.dart';
-import 'pages/notification/notification_screen.dart';
-import 'pages/issue_report_screen/issue_report_screen.dart';
+import 'package:assistant/view/lesson/lesson_page.dart';
+import 'package:assistant/view/note/note_screen.dart';
+import 'package:assistant/view/account/account_screen.dart';
+import 'view/setting/setting_screen.dart';
+import 'view/notification/notification_screen.dart';
+import 'view/issue_report_screen/issue_report_screen.dart';
 import 'constant.dart';
 
 class ScreenController {
