@@ -125,7 +125,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     setState(() {
                       showSpinner = false;
                     });
-                    print('log in');
                   } catch (e) {
                     setState(() {
                       Alert(context: context, title: "登入失敗", desc: e.toString())
