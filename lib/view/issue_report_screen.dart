@@ -87,6 +87,7 @@ class IssueReportScreen extends StatelessWidget {
               ],
             ),
           ),
+          // TODO: Unfinished with github issue
           GestureDetector(
             onTap: () => _urlLauncherApi.reportByPullRequest(),
             child: const Text(
