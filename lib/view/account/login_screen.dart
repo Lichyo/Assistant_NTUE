@@ -2,11 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/view/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:assistant/components/rounded_button.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/services/user_account_api.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -102,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                   FocusManager.instance.primaryFocus?.unfocus();
                   try {
-                    _userAccountApi.login(email: email, password: password);
+                    await _userAccountApi.login(email: email, password: password);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const Home()));
                     setState(() {

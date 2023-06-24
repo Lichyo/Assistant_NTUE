@@ -7,7 +7,9 @@ class UserAccountApi {
   final _auth = FirebaseAuth.instance;
 
   UserAccountApi() {
-    _setAccount();
+    if( isUserLogin() ) {
+      _setAccount();
+    }
   }
 
   bool isUserLogin() {

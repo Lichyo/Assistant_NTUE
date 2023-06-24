@@ -21,12 +21,11 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    login();
+    checkIsUserLoginAndSetScreenIndex();
   }
 
-  void login() {
+  void checkIsUserLoginAndSetScreenIndex() {
     if (_userAccountApi.isUserLogin()) {
-      print('object');
       setState(() {
         _selectedPage = ScreenIndex.curriculum;
       });
@@ -118,9 +117,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: _userAccountApi.isUserLogin()
-          ? _screenController.getPage(_selectedPage)
-          : _screenController.getPage(ScreenIndex.account),
+      body: _screenController.getPage(_selectedPage),
     );
   }
 }
