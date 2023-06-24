@@ -1,13 +1,11 @@
 // ignore_for_file: must_be_immutable, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:assistant/constant.dart';
 import 'package:assistant/view/home_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:assistant/components/rounded_button.dart';
+import 'package:assistant/services/user_account_api.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -17,8 +15,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final _firestore = FirebaseFirestore.instance;
-  final _auth = FirebaseAuth.instance;
+  final UserAccountApi _userAccountApi = UserAccountApi();
   String ID = "";
   String password = "";
   String name = "";
@@ -128,18 +125,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   });
                   FocusManager.instance.primaryFocus?.unfocus();
                   try {
-                    final newUser = await _auth.createUserWithEmailAndPassword(
-                        email: email, password: password);
-                    if (newUser != null) {
-                      await _firestore.collection('user').add({
-                        'userName': name,
-                        'email': email,
-                        'password': password,
-                        'ID': ID,
-                      });
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const Home()));
-                    }
+                    _userAccountApi.register(
+                        email: email, password: password, name: name, ID: ID);
+
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Home()));
+
                     setState(() {
                       showSpinner = false;
                     });

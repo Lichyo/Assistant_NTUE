@@ -7,7 +7,7 @@ class UserAccountApi {
   final _auth = FirebaseAuth.instance;
 
   UserAccountApi() {
-    if( isUserLogin() ) {
+    if (isUserLogin()) {
       _setAccount();
     }
   }
@@ -31,6 +31,25 @@ class UserAccountApi {
             ID: user.get('ID'));
         break;
       }
+    }
+  }
+
+  Future<void> register(
+      {required email, required password, required name, required ID}) async {
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      if (newUser != null) {
+        await _firestore.collection('user').add({
+          'userName': name,
+          'email': email,
+          'password': password,
+          'ID': ID,
+        });
+        _setAccount();
+      }
+    } catch (exception) {
+      throw Exception(exception);
     }
   }
 
