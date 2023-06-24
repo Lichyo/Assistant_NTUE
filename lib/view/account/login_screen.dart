@@ -7,7 +7,7 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:assistant/components/rounded_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:assistant/models/account/account.dart';
+import 'package:assistant/services/user_account_api.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -17,26 +17,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
+  final UserAccountApi _userAccountApi = UserAccountApi();
   String email = "";
   String password = "";
   bool isObscure = true;
   bool showSpinner = false;
-
-  Future getAccountDetail() async {
-    User? _user = FirebaseAuth.instance.currentUser;
-    final users = await _firestore.collection('user').get();
-    for (var user in users.docs) {
-      if (user.get('email') == _user!.email) {
-        Account.instance = Account(
-            password: user.get('password'),
-            userName: user.get('userName'),
-            email: user.get('email'),
-            ID: user.get('ID'));
-      }
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   });
                   FocusManager.instance.primaryFocus?.unfocus();
                   try {
-                    final user = await _auth.signInWithEmailAndPassword(
-                        email: email, password: password);
-                    getAccountDetail();
+                    _userAccountApi.login(email: email, password: password);
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const Home()));
                     setState(() {

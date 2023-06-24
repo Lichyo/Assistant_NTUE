@@ -5,6 +5,7 @@ class DrawHeader extends StatelessWidget {
   DrawHeader({
     super.key,
   });
+
   final _account = Account.instance;
 
   @override
@@ -28,11 +29,11 @@ class DrawHeader extends StatelessWidget {
             ),
           ),
           Text(
-            _account!.userName,
+            _account!.userName ?? '',
             style: const TextStyle(color: Colors.white, fontSize: 20),
           ),
           Text(
-            _account!.email,
+            _account!.email ?? '',
             style: TextStyle(
               color: Colors.grey[200],
               fontSize: 14,

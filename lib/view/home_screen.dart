@@ -2,11 +2,9 @@ import 'package:assistant/screen_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/components/draw_header.dart';
 import 'package:assistant/components/menu_item.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:assistant/view/account/account_screen.dart';
 import 'package:assistant/constant.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:assistant/models/account/account.dart';
+import 'package:assistant/services/user_account_api.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -16,81 +14,33 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  User? _user;
-  ScreenController screenController = ScreenController();
-  ScreenIndex selectedPage = ScreenIndex.account;
-  final _auth = FirebaseAuth.instance;
-  final _firestore = FirebaseFirestore.instance;
-  late Account account;
+  final UserAccountApi _userAccountApi = UserAccountApi();
+  final ScreenController _screenController = ScreenController();
+  ScreenIndex _selectedPage = ScreenIndex.account;
 
   @override
   void initState() {
     super.initState();
-    getCurrentUser();
-    onRefresh(FirebaseAuth.instance.currentUser);
+    login();
   }
 
-  onRefresh(currUser) {
-    setState(() {
-      _user = currUser;
-    });
-  }
-
-  ScreenIndex login() {
-    setState(() {
-      selectedPage = ScreenIndex.curriculum;
-    });
-    return selectedPage;
-  }
-
-  Future getAccountDetailAndInitAccount() async {
-    bool isUser = false;
-    final users = await _firestore.collection('user').get();
-    for (var user in users.docs) {
-      if (user.get('email') == _user?.email) {
-        setState(() {
-          Account.instance = Account(
-              password: user.get('password'),
-              userName: user.get('userName'),
-              email: user.get('email'),
-              ID: user.get('ID'));
-          login();
-        });
-        isUser = true;
-      }
+  void login() {
+    if (_userAccountApi.isUserLogin()) {
+      print('object');
+      setState(() {
+        _selectedPage = ScreenIndex.curriculum;
+      });
+    } else {
+      setState(() {
+        _selectedPage = ScreenIndex.account;
+      });
     }
-    if (isUser == false) {
-      account = Account(
-          userName: 'Unknown',
-          email: 'Unknown',
-          ID: '000000000',
-          password: '00000000');
-    }
-  }
-
-  void getCurrentUser() {
-    try {
-      final user = _auth.currentUser;
-      if (user != null) {
-        _user = user;
-        getAccountDetailAndInitAccount();
-      }
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  ScreenIndex notLogin() {
-    setState(() {
-      selectedPage = ScreenIndex.account;
-    });
-    return selectedPage;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (selectedPage != ScreenIndex.account)
+      appBar: (_selectedPage != ScreenIndex.account)
           ? AppBar(
               title: const Text(
                 'NTUE Assistant',
@@ -115,7 +65,7 @@ class _HomeState extends State<Home> {
                     icon: Icons.list,
                     onPressed: () {
                       setState(() {
-                        selectedPage = ScreenIndex.curriculum;
+                        _selectedPage = ScreenIndex.curriculum;
                         Navigator.pop(context);
                       });
                     },
@@ -125,7 +75,7 @@ class _HomeState extends State<Home> {
                     icon: Icons.book_rounded,
                     onPressed: () {
                       setState(() {
-                        selectedPage = ScreenIndex.note;
+                        _selectedPage = ScreenIndex.note;
                         Navigator.pop(context);
                       });
                     },
@@ -136,7 +86,7 @@ class _HomeState extends State<Home> {
                     icon: Icons.settings,
                     onPressed: () {
                       setState(() {
-                        selectedPage = ScreenIndex.setting;
+                        _selectedPage = ScreenIndex.setting;
                         Navigator.pop(context);
                       });
                     },
@@ -146,7 +96,7 @@ class _HomeState extends State<Home> {
                     icon: Icons.feedback_outlined,
                     onPressed: () {
                       setState(() {
-                        selectedPage = ScreenIndex.issueReport;
+                        _selectedPage = ScreenIndex.issueReport;
                         Navigator.pop(context);
                       });
                     },
@@ -156,7 +106,7 @@ class _HomeState extends State<Home> {
                     text: 'Log out',
                     onPressed: () {
                       setState(() {
-                        _auth.signOut();
+                        _userAccountApi.logout();
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const AccountScreen()));
                       });
@@ -168,9 +118,9 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      body: _user != null
-          ? screenController.getPage(selectedPage)
-          : screenController.getPage(notLogin()),
+      body: _userAccountApi.isUserLogin()
+          ? _screenController.getPage(_selectedPage)
+          : _screenController.getPage(ScreenIndex.account),
     );
   }
 }

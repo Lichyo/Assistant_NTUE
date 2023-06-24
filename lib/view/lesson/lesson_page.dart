@@ -61,7 +61,7 @@ class _LessonPageState extends State<LessonPage> {
     LessonController.instance.initLesson(file: map, id: _account?.ID);
     lessons = LessonController.instance.readAllLesson();
     for (int i = 0; i < lessons.length; i++) {
-      if(lessons[i].subject == "false") {
+      if (lessons[i].subject == "false") {
         isNoData = true;
         return;
       }
@@ -134,7 +134,8 @@ class _LessonPageState extends State<LessonPage> {
                           ),
                           Visibility(
                             visible: isWeekHasData('Tues'),
-                            child: WeekContainer(week: 'Tues', lessons: lessons),
+                            child:
+                                WeekContainer(week: 'Tues', lessons: lessons),
                           ),
                           Visibility(
                             visible: isWeekHasData('Wed'),
@@ -142,7 +143,8 @@ class _LessonPageState extends State<LessonPage> {
                           ),
                           Visibility(
                             visible: isWeekHasData('Thur'),
-                            child: WeekContainer(week: 'Thur', lessons: lessons),
+                            child:
+                                WeekContainer(week: 'Thur', lessons: lessons),
                           ),
                           Visibility(
                             visible: isWeekHasData('Fri'),
