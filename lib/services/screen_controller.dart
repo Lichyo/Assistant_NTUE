@@ -1,9 +1,9 @@
-import 'package:assistant/view/lesson/lesson_page.dart';
+import 'package:assistant/view/lesson_page.dart';
 import 'package:assistant/view/note/note_screen.dart';
 import 'package:assistant/view/account/account_screen.dart';
-import 'view/setting/setting_screen.dart';
-import 'view/issue_report_screen.dart';
-import 'constant.dart';
+import '../view/setting_screen.dart';
+import '../view/issue_report_screen.dart';
+import '../constant.dart';
 
 class ScreenController {
   bool isLogin = true;

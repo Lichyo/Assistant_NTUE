@@ -2,7 +2,7 @@ import 'package:assistant/view/note/add_note_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:assistant/models/note/note.dart';
 import 'package:assistant/db/NoteDB.dart';
-import 'package:assistant/components/note/note_widget.dart';
+import 'package:assistant/components/note_widget.dart';
 import 'package:assistant/services/notification_api.dart';
 
 class NoteScreen extends StatefulWidget {
